@@ -80,6 +80,8 @@ public class AccountDAO {
             em.close();
         }
     }
+    
+    
 
     // Có thể thêm các phương thức khác như findById, updateAccount, deleteAccount...
 }

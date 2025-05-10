@@ -1,8 +1,10 @@
 Controller\LoginServlet.class
+dao\ChapterDAO.class
 Controller\RegisterServlet.class
 ENum\PaymentStatus.class
 Model\NotificationRequest.class
 Model\Student.class
+dao\CategoryDAO.class
 Model\Category.class
 dao\AccountDAO.class
 Model\Order.class
@@ -19,7 +21,9 @@ Model\Question.class
 com\mycompany\el1\JakartaRestConfiguration.class
 Model\Teacher.class
 Model\Account.class
+dao\CourseDAO.class
 ENum\ScheduleDay.class
+dao\DescriptionDAO.class
 Model\Users.class
 Model\FileMedia.class
 Model\Description.class

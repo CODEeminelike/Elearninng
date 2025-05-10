@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Hiển thị trang đăng ký
-        request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/Register.jsp").forward(request, response);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("email", email);
             request.setAttribute("phone", phone);
             request.setAttribute("errorMessage", "Vui lòng sửa các lỗi sau:");
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/Register.jsp").forward(request, response);
             return;
         }
 
@@ -83,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("username", username);
             request.setAttribute("email", email);
             request.setAttribute("phone", phone);
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/Register.jsp").forward(request, response);
             return;
         }
 
@@ -98,14 +98,14 @@ public class RegisterServlet extends HttpServlet {
 
         if (success) {
             // Đăng ký thành công, chuyển hướng đến trang đăng nhập
-            response.sendRedirect(request.getContextPath() + "/login?registrationSuccess=true");
+            response.sendRedirect(request.getContextPath() + "/views/Login.jsp");
         } else {
             // Lưu thất bại
             request.setAttribute("errorMessage", "Đăng ký thất bại. Vui lòng thử lại sau.");
             request.setAttribute("username", username);
             request.setAttribute("email", email);
             request.setAttribute("phone", phone);
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/Register.jsp").forward(request, response);
         }
     }
 

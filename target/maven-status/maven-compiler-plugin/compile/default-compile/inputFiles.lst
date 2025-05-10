@@ -2,13 +2,17 @@ C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\ENum\P
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Controller\UsersJpaController.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\ENum\ScheduleDay.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\AccountDAO.java
+C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\DescriptionDAO.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Util\ValidationUtil.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Lesson.java
+C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\CategoryDAO.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Category.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Course.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Controller\LogoutServlet.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Teacher.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Description.java
+C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\CourseDAO.java
+C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\ChapterDAO.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Submission.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Payment.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Controller\LoginServlet.java

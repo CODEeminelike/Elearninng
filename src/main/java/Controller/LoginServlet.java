@@ -24,12 +24,10 @@ public class LoginServlet extends HttpServlet {
         accountDAO = new AccountDAO();
     }
 
-   
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Hiển thị trang đăng nhập (ví dụ: login.jsp)
-        request.getRequestDispatcher("views/login.jsp").forward(request, response);
+        request.getRequestDispatcher("views/home.jsp").forward(request, response);
     }
 
     @Override
@@ -52,7 +50,7 @@ public class LoginServlet extends HttpServlet {
             // Đăng nhập thất bại
             request.setAttribute("errorMessage", "Tên đăng nhập hoặc mật khẩu không chính xác.");
             // Quay lại trang đăng nhập và hiển thị lỗi
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/Login.jsp").forward(request, response); //"/views/Login.jsp"
         }
     }
 
