@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import jakarta.persistence.*; // Hoặc javax.persistence.* tùy phiên bản Jakarta EE/Java EE
 import java.io.Serializable;
@@ -8,12 +8,10 @@ import java.util.Objects; // Cần import Objects cho equals/hashCode
 
 @Entity
 @Table(name = "chapters")
-// Đã bỏ @Getter @Setter @NoArgsConstructor @AllArgsConstructor @EqualsAndHashCode
 public class Chapter implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // Đã bỏ @EqualsAndHashCode.Include
     private Long chapterId;
 
     @Column(nullable = false)
@@ -26,36 +24,25 @@ public class Chapter implements Serializable {
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    // Một Chapter có nhiều Assessment (Lesson kế thừa từ Assessment)
+    // Một Chapter có nhiều Lesson (lưu ý tên "lessons" khớp với "chapter" trong Lesson)
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @OrderBy("lessonOrder ASC")
-    private List<Assessment> lessons = new ArrayList<>(); // Khởi tạo ngay khi khai báo
+    @OrderBy("lessonIndex ASC")  // Sử dụng lessonIndex thay vì lessonOrder để đảm bảo tính chính xác
+    private List<Lesson> lessons = new ArrayList<>(); // Khởi tạo ngay khi khai báo
 
-    // Constructor không tham số (thay thế @NoArgsConstructor)
+    // Constructor không tham số
     public Chapter() {
         // Danh sách lessons đã được khởi tạo ở trên
     }
 
     // Constructor với các trường cơ bản và mối quan hệ ManyToOne
-    // (thay thế @AllArgsConstructor, thường bao gồm các trường cơ bản và ManyToOne)
     public Chapter(Long chapterId, String title, Integer chapterOrder, Course course) {
         this.chapterId = chapterId;
         this.title = title;
         this.chapterOrder = chapterOrder;
         this.course = course;
-        // Danh sách lessons đã được khởi tạo ở trên
     }
 
-    // Nếu bạn muốn constructor bao gồm cả danh sách lessons, bạn cần tự viết
-    // public Chapter(Long chapterId, ..., Course course, List<Assessment> lessons) {
-    //     this.chapterId = chapterId;
-    //     ...
-    //     this.course = course;
-    //     this.lessons = lessons;
-    // }
-
-
-    // Getters
+    // Getters và Setters
     public Long getChapterId() {
         return chapterId;
     }
@@ -72,11 +59,10 @@ public class Chapter implements Serializable {
         return course;
     }
 
-    public List<Assessment> getLessons() {
+    public List<Lesson> getLessons() {
         return lessons;
     }
 
-    // Setters (Setter cho mối quan hệ ManyToOne và các trường cơ bản; Setter cho danh sách thường không được tạo)
     public void setChapterId(Long chapterId) {
         this.chapterId = chapterId;
     }
@@ -93,10 +79,6 @@ public class Chapter implements Serializable {
         this.course = course;
     }
 
-    // Setter cho danh sách lessons thường không được tạo
-
-    // Phương thức equals() thủ công (thay thế @EqualsAndHashCode)
-    // Dựa trên trường được đánh dấu @EqualsAndHashCode.Include trước đây (chapterId)
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -105,8 +87,6 @@ public class Chapter implements Serializable {
         return Objects.equals(chapterId, chapter.chapterId);
     }
 
-    // Phương thức hashCode() thủ công (thay thế @EqualsAndHashCode)
-    // Dựa trên trường được đánh dấu @EqualsAndHashCode.Include trước đây (chapterId)
     @Override
     public int hashCode() {
         return Objects.hash(chapterId);

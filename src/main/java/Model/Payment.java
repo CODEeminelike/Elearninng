@@ -1,4 +1,5 @@
-package model;
+package Model;
+
 
 // Import các lớp JPA và Java cần thiết
 import jakarta.persistence.*; // Hoặc javax.persistence.* tùy phiên bản Jakarta EE/Java EE

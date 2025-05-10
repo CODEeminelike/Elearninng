@@ -1,7 +1,7 @@
 package Controller;
 
 import dao.AccountDAO; // Import lớp DAO của bạn
-import model.Account; // Import lớp Model của bạn
+import Model.Account; // Import lớp Model của bạn
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

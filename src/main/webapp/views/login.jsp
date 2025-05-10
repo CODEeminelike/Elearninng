@@ -1,34 +1,93 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>ÄÄƒng nháº­p</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>??ng Nh?p</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .server-error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
-    <h2>ÄÄƒng nháº­p</h2>
-    <%-- Hiá»ƒn thá»‹ thÃ´ng bÃ¡o lá»—i náº¿u cÃ³ --%>
+
+    <h2>??ng Nh?p</h2>
+    <%-- Hi?n th? thông báo l?i t? server n?u có --%>
     <% if (request.getAttribute("errorMessage") != null) { %>
-        <p style="color: red;"><%= request.getAttribute("errorMessage") %></p>
-    <% } %>
-     <%-- Hiá»ƒn thá»‹ thÃ´ng bÃ¡o Ä‘Äƒng kÃ½ thÃ nh cÃ´ng náº¿u cÃ³ --%>
-    <% if ("true".equals(request.getParameter("registrationSuccess"))) { %>
-        <p style="color: green;">ÄÄƒng kÃ½ thÃ nh cÃ´ng! Vui lÃ²ng Ä‘Äƒng nháº­p.</p>
+        <div class="server-error"><%= request.getAttribute("errorMessage") %></div>
     <% } %>
 
-    <form action="<%= request.getContextPath() %>/login" method="post">
-        <div>
-            <label for="username">TÃªn Ä‘Äƒng nháº­p:</label><br>
-            <input type="text" id="username" name="username" required>
+    <%-- Hi?n th? thông báo ??ng kı thành công n?u có --%>
+    <% if ("true".equals(request.getParameter("registrationSuccess"))) { %>
+        <div style="color: green; font-weight: bold; margin-bottom: 15px;">
+            ??ng kı thành công! Vui lòng ??ng nh?p.
         </div>
-        <div>
-            <label for="password">Máº­t kháº©u:</label><br>
-            <input type="password" id="password" name="password" required>
+    <% } %>
+
+    <form id="loginForm" action="<%= request.getContextPath() %>/login" method="POST">
+        <!-- Tên ??ng nh?p -->
+        <div class="form-group">
+            <label for="username">Tên ??ng nh?p:</label>
+            <input type="text" id="username" name="username" required placeholder="Nh?p tên ??ng nh?p"
+                   value="<%= request.getAttribute("username") != null ? request.getAttribute("username") : "" %>">
+            <span id="usernameError" class="error"></span>
         </div>
-        <br>
-        <button type="submit">ÄÄƒng nháº­p</button>
+
+        <!-- M?t kh?u -->
+        <div class="form-group">
+            <label for="password">M?t kh?u:</label>
+            <input type="password" id="password" name="password" required placeholder="Nh?p m?t kh?u">
+            <span id="passwordError" class="error"></span>
+        </div>
+
+        <!-- Nút submit -->
+        <div>
+            <input type="submit" value="??ng nh?p">
+        </div>
     </form>
 
-    <p>ChÆ°a cÃ³ tÃ i khoáº£n? <a href="<%= request.getContextPath() %>/register">ÄÄƒng kÃ½ ngay</a>.</p>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            let isValid = true;
+
+            // L?y giá tr? t? các tr??ng
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            // Reset thông báo l?i
+            document.getElementById("usernameError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+
+            // Ki?m tra tên ??ng nh?p
+            if (username.length < 3) {
+                document.getElementById("usernameError").textContent = "Tên ??ng nh?p ph?i có ít nh?t 3 kı t?";
+                isValid = false;
+            }
+
+            // Ki?m tra m?t kh?u
+            if (password.length < 6) {
+                document.getElementById("passwordError").textContent = "M?t kh?u ph?i có ít nh?t 6 kı t?";
+                isValid = false;
+            }
+
+            // Ng?n submit n?u có l?i
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
 </body>
 </html>

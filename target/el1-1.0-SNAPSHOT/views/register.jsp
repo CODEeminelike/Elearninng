@@ -1,39 +1,120 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>ƒêƒÉng k√Ω t√†i kho·∫£n</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>??ng K˝ T‡i Kho?n</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .server-error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
-    <h2>ƒêƒÉng k√Ω t√†i kho·∫£n m·ªõi</h2>
-     <%-- Hi·ªÉn th·ªã th√¥ng b√°o l·ªói n·∫øu c√≥ --%>
+
+    <h2>??ng K˝ T‡i Kho?n</h2>
+    <%-- Hi?n th? thÙng b·o l?i t? server n?u cÛ --%>
     <% if (request.getAttribute("errorMessage") != null) { %>
-        <p style="color: red;"><%= request.getAttribute("errorMessage") %></p>
+        <div class="server-error"><%= request.getAttribute("errorMessage") %></div>
     <% } %>
 
-    <form action="<%= request.getContextPath() %>/register" method="post">
+    <form id="registerForm" action="<%= request.getContextPath() %>/register" method="POST">
+        <!-- TÍn ??ng nh?p -->
+        <div class="form-group">
+            <label for="username">TÍn ??ng nh?p:</label>
+            <input type="text" id="username" name="username" required placeholder="Nh?p tÍn ??ng nh?p"
+                   value="<%= request.getAttribute("username") != null ? request.getAttribute("username") : "" %>">
+            <span id="usernameError" class="error"></span>
+        </div>
+
+        <!-- M?t kh?u -->
+        <div class="form-group">
+            <label for="password">M?t kh?u:</label>
+            <input type="password" id="password" name="password" required placeholder="Nh?p m?t kh?u">
+            <span id="passwordError" class="error"></span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Nh?p email"
+                   value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>">
+            <span id="emailError" class="error"></span>
+        </div>
+
+        <!-- S? ?i?n tho?i -->
+        <div class="form-group">
+            <label for="phone">S? ?i?n tho?i:</label>
+            <input type="text" id="phone" name="phone" placeholder="Nh?p s? ?i?n tho?i"
+                   value="<%= request.getAttribute("phone") != null ? request.getAttribute("phone") : "" %>">
+            <span id="phoneError" class="error"></span>
+        </div>
+
+        <!-- N˙t submit -->
         <div>
-            <label for="username">T√™n ƒëƒÉng nh·∫≠p:</label><br>
-            <input type="text" id="username" name="username" value="<%= request.getAttribute("username") != null ? request.getAttribute("username") : "" %>" required>
+            <input type="submit" value="??ng k˝">
         </div>
-        <div>
-            <label for="password">M·∫≠t kh·∫©u:</label><br>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>" required>
-        </div>
-         <div>
-            <label for="phone">ƒêi·ªán tho·∫°i:</label><br>
-            <input type="text" id="phone" name="phone" value="<%= request.getAttribute("phone") != null ? request.getAttribute("phone") : "" %>">
-        </div>
-        <%-- C√≥ th·ªÉ th√™m c√°c tr∆∞·ªùng kh√°c cho Student n·∫øu c·∫ßn --%>
-        <br>
-        <button type="submit">ƒêƒÉng k√Ω</button>
     </form>
 
-    <p>ƒê√£ c√≥ t√†i kho·∫£n? <a href="<%= request.getContextPath() %>/login">ƒêƒÉng nh·∫≠p t·∫°i ƒë√¢y</a>.</p>
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            let isValid = true;
+
+            // L?y gi· tr? t? c·c tr??ng
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+
+            // Reset thÙng b·o l?i
+            document.getElementById("usernameError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("phoneError").textContent = "";
+
+            // Ki?m tra tÍn ??ng nh?p
+            if (username.length < 3) {
+                document.getElementById("usernameError").textContent = "TÍn ??ng nh?p ph?i cÛ Ìt nh?t 3 k˝ t?";
+                isValid = false;
+            }
+
+            // Ki?m tra m?t kh?u
+            if (password.length < 6) {
+                document.getElementById("passwordError").textContent = "M?t kh?u ph?i cÛ Ìt nh?t 6 k˝ t?";
+                isValid = false;
+            }
+
+            // Ki?m tra email
+            const emailRegex = /^\S+@\S+\.\S+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById("emailError").textContent = "Email khÙng ?˙ng ??nh d?ng";
+                isValid = false;
+            }
+
+            // Ki?m tra s? ?i?n tho?i (n?u cÛ)
+            if (phone) {
+                const phoneRegex = /^\d{10,11}$/;
+                impegno.getElementById("phoneError").textContent = "S? ?i?n tho?i ph?i cÛ 10-11 ch? s?";
+                isValid = false;
+            }
+
+            // Ng?n submit n?u cÛ l?i
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
 </body>
 </html>

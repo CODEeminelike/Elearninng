@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="AccountTest" time="1.825" tests="1" errors="1" skipped="0" failures="0">
+  <properties>
+    <property name="netbeans.deploy" value="true"/>
+    <property name="java.specification.version" value="22"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\target\test-classes;C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\target\classes;C:\Users\LENOVO\.m2\repository\jakarta\platform\jakarta.jakartaee-api\10.0.0\jakarta.jakartaee-api-10.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\platform\jakarta.jakartaee-web-api\10.0.0\jakarta.jakartaee-web-api-10.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\servlet\jsp\jakarta.servlet.jsp-api\3.1.0\jakarta.servlet.jsp-api-3.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\el\jakarta.el-api\5.0.1\jakarta.el-api-5.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\servlet\jsp\jstl\jakarta.servlet.jsp.jstl-api\3.0.0\jakarta.servlet.jsp.jstl-api-3.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\faces\jakarta.faces-api\4.0.1\jakarta.faces-api-4.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\ws\rs\jakarta.ws.rs-api\3.1.0\jakarta.ws.rs-api-3.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\websocket\jakarta.websocket-api\2.1.0\jakarta.websocket-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\websocket\jakarta.websocket-client-api\2.1.0\jakarta.websocket-client-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\json\jakarta.json-api\2.1.0\jakarta.json-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\json\bind\jakarta.json.bind-api\3.0.0\jakarta.json.bind-api-3.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\ejb\jakarta.ejb-api\4.0.1\jakarta.ejb-api-4.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\LENOVO\.m2\repository\jakarta\interceptor\jakarta.interceptor-api\2.1.0\jakarta.interceptor-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\enterprise\jakarta.enterprise.cdi-api\4.0.1\jakarta.enterprise.cdi-api-4.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\enterprise\jakarta.enterprise.lang-model\4.0.1\jakarta.enterprise.lang-model-4.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\authentication\jakarta.authentication-api\3.0.0\jakarta.authentication-api-3.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\security\enterprise\jakarta.security.enterprise-api\3.0.0\jakarta.security.enterprise-api-3.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\jms\jakarta.jms-api\3.1.0\jakarta.jms-api-3.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.0\jakarta.activation-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\mail\jakarta.mail-api\2.1.0\jakarta.mail-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\resource\jakarta.resource-api\2.1.0\jakarta.resource-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\authorization\jakarta.authorization-api\2.1.0\jakarta.authorization-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\batch\jakarta.batch-api\2.1.1\jakarta.batch-api-2.1.1.jar;C:\Users\LENOVO\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\LENOVO\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\LENOVO\.m2\repository\org\eclipse\persistence\eclipselink\4.0.2\eclipselink-4.0.2.jar;C:\Users\LENOVO\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar;C:\Users\LENOVO\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.3\jaxb-xjc-4.0.3.jar;C:\Users\LENOVO\.m2\repository\com\sun\xml\bind\jaxb-core\4.0.3\jaxb-core-4.0.3.jar;C:\Users\LENOVO\.m2\repository\org\eclipse\angus\angus-activation\2.0.1\angus-activation-2.0.1.jar;C:\Users\LENOVO\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\LENOVO\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\LENOVO\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\LENOVO\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Bangkok"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="22"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-22\bin"/>
+    <property name="sun.java.command" value="C:\Users\LENOVO\AppData\Local\Temp\surefire4278086507246507131\surefirebooter-20250509230542703_3.jar C:\Users\LENOVO\AppData\Local\Temp\surefire4278086507246507131 2025-05-09T23-05-42_512-jvmRun1 surefire-20250509230542703_1tmp surefire_0-20250509230542703_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\target\test-classes;C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\target\classes;C:\Users\LENOVO\.m2\repository\jakarta\platform\jakarta.jakartaee-api\10.0.0\jakarta.jakartaee-api-10.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\platform\jakarta.jakartaee-web-api\10.0.0\jakarta.jakartaee-web-api-10.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\servlet\jsp\jakarta.servlet.jsp-api\3.1.0\jakarta.servlet.jsp-api-3.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\el\jakarta.el-api\5.0.1\jakarta.el-api-5.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\servlet\jsp\jstl\jakarta.servlet.jsp.jstl-api\3.0.0\jakarta.servlet.jsp.jstl-api-3.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\faces\jakarta.faces-api\4.0.1\jakarta.faces-api-4.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\ws\rs\jakarta.ws.rs-api\3.1.0\jakarta.ws.rs-api-3.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\websocket\jakarta.websocket-api\2.1.0\jakarta.websocket-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\websocket\jakarta.websocket-client-api\2.1.0\jakarta.websocket-client-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\json\jakarta.json-api\2.1.0\jakarta.json-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\json\bind\jakarta.json.bind-api\3.0.0\jakarta.json.bind-api-3.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\ejb\jakarta.ejb-api\4.0.1\jakarta.ejb-api-4.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\LENOVO\.m2\repository\jakarta\interceptor\jakarta.interceptor-api\2.1.0\jakarta.interceptor-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\enterprise\jakarta.enterprise.cdi-api\4.0.1\jakarta.enterprise.cdi-api-4.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\enterprise\jakarta.enterprise.lang-model\4.0.1\jakarta.enterprise.lang-model-4.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\LENOVO\.m2\repository\jakarta\authentication\jakarta.authentication-api\3.0.0\jakarta.authentication-api-3.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\security\enterprise\jakarta.security.enterprise-api\3.0.0\jakarta.security.enterprise-api-3.0.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\jms\jakarta.jms-api\3.1.0\jakarta.jms-api-3.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.0\jakarta.activation-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\mail\jakarta.mail-api\2.1.0\jakarta.mail-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\resource\jakarta.resource-api\2.1.0\jakarta.resource-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\authorization\jakarta.authorization-api\2.1.0\jakarta.authorization-api-2.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\batch\jakarta.batch-api\2.1.1\jakarta.batch-api-2.1.1.jar;C:\Users\LENOVO\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\LENOVO\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\LENOVO\.m2\repository\org\eclipse\persistence\eclipselink\4.0.2\eclipselink-4.0.2.jar;C:\Users\LENOVO\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\LENOVO\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar;C:\Users\LENOVO\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.3\jaxb-xjc-4.0.3.jar;C:\Users\LENOVO\.m2\repository\com\sun\xml\bind\jaxb-core\4.0.3\jaxb-core-4.0.3.jar;C:\Users\LENOVO\.m2\repository\org\eclipse\angus\angus-activation\2.0.1\angus-activation-2.0.1.jar;C:\Users\LENOVO\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\LENOVO\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\LENOVO\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\LENOVO\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\LENOVO"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-07-16"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-22"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\LENOVO\AppData\Local\Temp\surefire4278086507246507131\surefirebooter-20250509230542703_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="netbeans.deploy.clientUrlPart" value="/views/register.jsp"/>
+    <property name="java.runtime.version" value="22.0.2+9-70"/>
+    <property name="user.name" value="LENOVO"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans-21\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="localRepository" value="C:\Users\LENOVO\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\LENOVO\AppData\Local\Temp\"/>
+    <property name="java.version" value="22.0.2"/>
+    <property name="user.dir" value="C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-22\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\VMware\VMware Workstation\bin\;C:\Program Files\Microsoft MPI\Bin\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Scripts;C:\MAVEN\apache-maven-3.9.9\bin;C:\Program Files\nodejs\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Spyder\Python;C:\Spyder\Python\python.exe;C:\Users\LENOVO\AppData\Local\Microsoft\WindowsApps;C:\Microsoft VS Code\bin;C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Scripts;C:\Spyder\Python\lib\site-packages\pip;C:\Spyder\Python\Scripts;C:\ffmpeg;C:\Users\LENOVO\AppData\Roaming\npm;C:\Program Files\Azure Data Studio\bin;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="22.0.2+9-70"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="66.0"/>
+  </properties>
+  <testcase name="testCreateAccount" classname="AccountTest" time="0.118">
+    <error message="Exception [EclipseLink-4002] (Eclipse Persistence Services - 4.0.2.v202306161219): org.eclipse.persistence.exceptions.DatabaseException&#10;Internal Exception: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry &apos;testuser@example.com&apos; for key &apos;accounts.EMAIL&apos;&#10;Error Code: 1062&#10;Call: INSERT INTO accounts (AVATAR, EMAIL, ISACTIVE, PASSWORD, PHONE, USERNAME, DTYPE) VALUES (?, ?, ?, ?, ?, ?, ?)&#10;	bind =&gt; [/path/to/avatar, testuser@example.com, true, password123, 1234567890, testuser, Account]&#10;Query: InsertObjectQuery(Model.Account@111610e6)" type="jakarta.persistence.RollbackException"><![CDATA[jakarta.persistence.RollbackException: 
+Exception [EclipseLink-4002] (Eclipse Persistence Services - 4.0.2.v202306161219): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'testuser@example.com' for key 'accounts.EMAIL'
+Error Code: 1062
+Call: INSERT INTO accounts (AVATAR, EMAIL, ISACTIVE, PASSWORD, PHONE, USERNAME, DTYPE) VALUES (?, ?, ?, ?, ?, ?, ?)
+	bind => [/path/to/avatar, testuser@example.com, true, password123, 1234567890, testuser, Account]
+Query: InsertObjectQuery(Model.Account@111610e6)
+	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.commit(EntityTransactionImpl.java:162)
+	at AccountTest.testCreateAccount(AccountTest.java:35)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: Exception [EclipseLink-4002] (Eclipse Persistence Services - 4.0.2.v202306161219): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'testuser@example.com' for key 'accounts.EMAIL'
+Error Code: 1062
+Call: INSERT INTO accounts (AVATAR, EMAIL, ISACTIVE, PASSWORD, PHONE, USERNAME, DTYPE) VALUES (?, ?, ?, ?, ?, ?, ?)
+	bind => [/path/to/avatar, testuser@example.com, true, password123, 1234567890, testuser, Account]
+Query: InsertObjectQuery(Model.Account@111610e6)
+	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:334)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeDirectNoSelect(DatabaseAccessor.java:919)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeNoSelect(DatabaseAccessor.java:981)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:642)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeCall(DatabaseAccessor.java:569)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.basicExecuteCall(AbstractSession.java:2048)
+	at org.eclipse.persistence.sessions.server.ClientSession.executeCall(ClientSession.java:311)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:280)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:266)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.insertObject(DatasourceCallQueryMechanism.java:436)
+	at org.eclipse.persistence.internal.queries.StatementQueryMechanism.insertObject(StatementQueryMechanism.java:193)
+	at org.eclipse.persistence.internal.queries.StatementQueryMechanism.insertObject(StatementQueryMechanism.java:209)
+	at org.eclipse.persistence.internal.queries.DatabaseQueryMechanism.insertObjectForWrite(DatabaseQueryMechanism.java:514)
+	at org.eclipse.persistence.queries.InsertObjectQuery.executeCommit(InsertObjectQuery.java:86)
+	at org.eclipse.persistence.queries.InsertObjectQuery.executeCommitWithChangeSet(InsertObjectQuery.java:97)
+	at org.eclipse.persistence.internal.queries.DatabaseQueryMechanism.executeWriteWithChangeSet(DatabaseQueryMechanism.java:326)
+	at org.eclipse.persistence.queries.WriteObjectQuery.executeDatabaseQuery(WriteObjectQuery.java:61)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:913)
+	at org.eclipse.persistence.queries.DatabaseQuery.executeInUnitOfWork(DatabaseQuery.java:812)
+	at org.eclipse.persistence.queries.ObjectLevelModifyQuery.executeInUnitOfWorkObjectLevelModifyQuery(ObjectLevelModifyQuery.java:109)
+	at org.eclipse.persistence.queries.ObjectLevelModifyQuery.executeInUnitOfWork(ObjectLevelModifyQuery.java:86)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:3025)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1841)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1823)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1773)
+	at org.eclipse.persistence.internal.sessions.CommitManager.commitNewObjectsForClassWithChangeSet(CommitManager.java:248)
+	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsWithChangeSet(CommitManager.java:147)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.writeAllObjectsWithChangeSet(AbstractSession.java:4335)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitToDatabase(UnitOfWorkImpl.java:1515)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitToDatabaseWithChangeSet(UnitOfWorkImpl.java:1605)
+	at org.eclipse.persistence.internal.sessions.RepeatableWriteUnitOfWork.commitRootUnitOfWork(RepeatableWriteUnitOfWork.java:287)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitAndResume(UnitOfWorkImpl.java:1242)
+	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.commit(EntityTransactionImpl.java:137)
+	... 68 more
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'testuser@example.com' for key 'accounts.EMAIL'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeDirectNoSelect(DatabaseAccessor.java:909)
+	... 99 more
+]]></error>
+    <system-out><![CDATA[[EL Fine]: server: 2025-05-09 23:05:43.692--Thread(Thread[#1,main,5,main])--Configured server platform: org.eclipse.persistence.platform.server.NoServerPlatform
+[EL Warning]: 2025-05-09 23:05:43.753--Thread(Thread[#1,main,5,main])--Java SE '22' is not fully supported yet. Report this error to the EclipseLink open source project. (There is no English translation for this message.)
+[EL Fine]: 2025-05-09 23:05:43.755--Thread(Thread[#1,main,5,main])--Generating bytecode for Java SE '21'. (There is no English translation for this message.)
+[EL Config]: metadata: 2025-05-09 23:05:43.906--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Assessment] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.934--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field submissions] is being defaulted to: class Model.Submission.
+[EL Config]: metadata: 2025-05-09 23:05:43.937--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field questions] is being defaulted to: class Model.Question.
+[EL Config]: metadata: 2025-05-09 23:05:43.939--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.NotificationRequest] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.943--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field student] is being defaulted to: class Model.Student.
+[EL Config]: metadata: 2025-05-09 23:05:43.945--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Question] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.945--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field assessment] is being defaulted to: class Model.Assessment.
+[EL Config]: metadata: 2025-05-09 23:05:43.95--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target class (reference) class for the element collection mapping element [field options] is being defaulted to: class java.lang.String.
+[EL Config]: metadata: 2025-05-09 23:05:43.951--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Account] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.952--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Teacher] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.953--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field courses] is being defaulted to: class Model.Course.
+[EL Config]: metadata: 2025-05-09 23:05:43.953--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Review] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.954--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field student] is being defaulted to: class Model.Student.
+[EL Config]: metadata: 2025-05-09 23:05:43.955--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field course] is being defaulted to: class Model.Course.
+[EL Config]: metadata: 2025-05-09 23:05:43.956--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Lesson] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.957--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field chapter] is being defaulted to: class Model.Chapter.
+[EL Config]: metadata: 2025-05-09 23:05:43.957--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field attachment] is being defaulted to: class Model.FileMedia.
+[EL Config]: metadata: 2025-05-09 23:05:43.958--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Description] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.96--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to one mapping element [field course] is being defaulted to: class Model.Course.
+[EL Config]: metadata: 2025-05-09 23:05:43.961--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Payment] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.964--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to one mapping element [field order] is being defaulted to: class Model.Order.
+[EL Config]: metadata: 2025-05-09 23:05:43.965--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Category] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.965--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field courses] is being defaulted to: class Model.Course.
+[EL Config]: metadata: 2025-05-09 23:05:43.965--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Order] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.966--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field student] is being defaulted to: class Model.Student.
+[EL Config]: metadata: 2025-05-09 23:05:43.966--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field course] is being defaulted to: class Model.Course.
+[EL Config]: metadata: 2025-05-09 23:05:43.966--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to one mapping element [field payment] is being defaulted to: class Model.Payment.
+[EL Config]: metadata: 2025-05-09 23:05:43.967--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Course] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.967--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field teacher] is being defaulted to: class Model.Teacher.
+[EL Config]: metadata: 2025-05-09 23:05:43.968--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field reviews] is being defaulted to: class Model.Review.
+[EL Config]: metadata: 2025-05-09 23:05:43.968--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field chapters] is being defaulted to: class Model.Chapter.
+[EL Config]: metadata: 2025-05-09 23:05:43.969--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to one mapping element [field description] is being defaulted to: class Model.Description.
+[EL Config]: metadata: 2025-05-09 23:05:43.969--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field orders] is being defaulted to: class Model.Order.
+[EL Config]: metadata: 2025-05-09 23:05:43.969--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field category] is being defaulted to: class Model.Category.
+[EL Config]: metadata: 2025-05-09 23:05:43.97--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Chapter] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.97--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field course] is being defaulted to: class Model.Course.
+[EL Config]: metadata: 2025-05-09 23:05:43.97--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field lessons] is being defaulted to: class Model.Lesson.
+[EL Config]: metadata: 2025-05-09 23:05:43.971--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Users] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.972--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.FileMedia] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.973--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field lesson] is being defaulted to: class Model.Lesson.
+[EL Config]: metadata: 2025-05-09 23:05:43.973--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Submission] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.974--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field assessment] is being defaulted to: class Model.Assessment.
+[EL Config]: metadata: 2025-05-09 23:05:43.974--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the many to one mapping element [field student] is being defaulted to: class Model.Student.
+[EL Config]: metadata: 2025-05-09 23:05:43.976--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target class (reference) class for the element collection mapping element [field studentResult] is being defaulted to: class java.lang.String.
+[EL Config]: metadata: 2025-05-09 23:05:43.977--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Admin] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.977--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The access type for the persistent class [class Model.Student] is set to [FIELD].
+[EL Config]: metadata: 2025-05-09 23:05:43.977--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field notificationRequests] is being defaulted to: class Model.NotificationRequest.
+[EL Config]: metadata: 2025-05-09 23:05:43.978--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field reviews] is being defaulted to: class Model.Review.
+[EL Config]: metadata: 2025-05-09 23:05:43.978--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field submissions] is being defaulted to: class Model.Submission.
+[EL Config]: metadata: 2025-05-09 23:05:43.978--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The target entity (reference) class for the one to many mapping element [field orders] is being defaulted to: class Model.Order.
+[EL Config]: metadata: 2025-05-09 23:05:43.978--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Assessment] is being defaulted to: Assessment.
+[EL Config]: metadata: 2025-05-09 23:05:43.997--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [duration] is being defaulted to: DURATION.
+[EL Config]: metadata: 2025-05-09 23:05:43.998--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [name] is being defaulted to: NAME.
+[EL Config]: metadata: 2025-05-09 23:05:44.0--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [description] is being defaulted to: DESCRIPTION.
+[EL Config]: metadata: 2025-05-09 23:05:44.001--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [passingScore] is being defaulted to: PASSINGSCORE.
+[EL Config]: metadata: 2025-05-09 23:05:44.001--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [maxScore] is being defaulted to: MAXSCORE.
+[EL Config]: metadata: 2025-05-09 23:05:44.001--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [assessmentId] is being defaulted to: ASSESSMENTID.
+[EL Config]: metadata: 2025-05-09 23:05:44.001--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.NotificationRequest] is being defaulted to: NotificationRequest.
+[EL Config]: metadata: 2025-05-09 23:05:44.002--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [sentDate] is being defaulted to: SENTDATE.
+[EL Config]: metadata: 2025-05-09 23:05:44.006--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [requestId] is being defaulted to: REQUESTID.
+[EL Config]: metadata: 2025-05-09 23:05:44.009--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [title] is being defaulted to: TITLE.
+[EL Config]: metadata: 2025-05-09 23:05:44.01--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [message] is being defaulted to: MESSAGE.
+[EL Config]: metadata: 2025-05-09 23:05:44.012--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Question] is being defaulted to: Question.
+[EL Config]: metadata: 2025-05-09 23:05:44.013--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2025-05-09 23:05:44.013--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [correctAnswer] is being defaulted to: CORRECTANSWER.
+[EL Config]: metadata: 2025-05-09 23:05:44.013--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [quesId] is being defaulted to: QUESID.
+[EL Config]: metadata: 2025-05-09 23:05:44.014--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [questionText] is being defaulted to: QUESTIONTEXT.
+[EL Config]: metadata: 2025-05-09 23:05:44.014--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Teacher] is being defaulted to: Teacher.
+[EL Config]: metadata: 2025-05-09 23:05:44.014--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Account] is being defaulted to: Account.
+[EL Config]: metadata: 2025-05-09 23:05:44.018--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The discriminator column name for the root inheritance class [Model.Account] is being defaulted to: DTYPE.
+[EL Config]: metadata: 2025-05-09 23:05:44.018--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [password] is being defaulted to: PASSWORD.
+[EL Config]: metadata: 2025-05-09 23:05:44.019--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [phone] is being defaulted to: PHONE.
+[EL Config]: metadata: 2025-05-09 23:05:44.019--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [avatar] is being defaulted to: AVATAR.
+[EL Config]: metadata: 2025-05-09 23:05:44.02--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [isActive] is being defaulted to: ISACTIVE.
+[EL Config]: metadata: 2025-05-09 23:05:44.02--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [email] is being defaulted to: EMAIL.
+[EL Config]: metadata: 2025-05-09 23:05:44.02--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [username] is being defaulted to: USERNAME.
+[EL Config]: metadata: 2025-05-09 23:05:44.022--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the inheritance class [class Model.Teacher] is being defaulted to: account_id.
+[EL Config]: metadata: 2025-05-09 23:05:44.025--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [qualifications] is being defaulted to: QUALIFICATIONS.
+[EL Config]: metadata: 2025-05-09 23:05:44.026--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [name] is being defaulted to: NAME.
+[EL Config]: metadata: 2025-05-09 23:05:44.027--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [bio] is being defaulted to: BIO.
+[EL Config]: metadata: 2025-05-09 23:05:44.027--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Review] is being defaulted to: Review.
+[EL Config]: metadata: 2025-05-09 23:05:44.029--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [reviewDate] is being defaulted to: REVIEWDATE.
+[EL Config]: metadata: 2025-05-09 23:05:44.029--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [rating] is being defaulted to: RATING.
+[EL Config]: metadata: 2025-05-09 23:05:44.03--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [comment] is being defaulted to: COMMENT.
+[EL Config]: metadata: 2025-05-09 23:05:44.034--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [reviewId] is being defaulted to: REVIEWID.
+[EL Config]: metadata: 2025-05-09 23:05:44.035--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Lesson] is being defaulted to: Lesson.
+[EL Config]: metadata: 2025-05-09 23:05:44.035--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [lessonIndex] is being defaulted to: LESSONINDEX.
+[EL Config]: metadata: 2025-05-09 23:05:44.036--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [lessonId] is being defaulted to: LESSONID.
+[EL Config]: metadata: 2025-05-09 23:05:44.036--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [description] is being defaulted to: DESCRIPTION.
+[EL Config]: metadata: 2025-05-09 23:05:44.036--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [title] is being defaulted to: TITLE.
+[EL Config]: metadata: 2025-05-09 23:05:44.036--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Description] is being defaulted to: Description.
+[EL Config]: metadata: 2025-05-09 23:05:44.037--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [descriptionId] is being defaulted to: DESCRIPTIONID.
+[EL Config]: metadata: 2025-05-09 23:05:44.037--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [content] is being defaulted to: CONTENT.
+[EL Config]: metadata: 2025-05-09 23:05:44.037--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Payment] is being defaulted to: Payment.
+[EL Config]: metadata: 2025-05-09 23:05:44.038--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [amount] is being defaulted to: AMOUNT.
+[EL Config]: metadata: 2025-05-09 23:05:44.038--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [paymentId] is being defaulted to: PAYMENTID.
+[EL Config]: metadata: 2025-05-09 23:05:44.038--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [paymentMethod] is being defaulted to: PAYMENTMETHOD.
+[EL Config]: metadata: 2025-05-09 23:05:44.042--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [paymentDate] is being defaulted to: PAYMENTDATE.
+[EL Config]: metadata: 2025-05-09 23:05:44.042--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [status] is being defaulted to: STATUS.
+[EL Config]: metadata: 2025-05-09 23:05:44.043--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Category] is being defaulted to: Category.
+[EL Config]: metadata: 2025-05-09 23:05:44.043--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [name] is being defaulted to: NAME.
+[EL Config]: metadata: 2025-05-09 23:05:44.043--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [description] is being defaulted to: DESCRIPTION.
+[EL Config]: metadata: 2025-05-09 23:05:44.044--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [categoryId] is being defaulted to: CATEGORYID.
+[EL Config]: metadata: 2025-05-09 23:05:44.044--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Order] is being defaulted to: Order.
+[EL Config]: metadata: 2025-05-09 23:05:44.044--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [totalPrice] is being defaulted to: TOTALPRICE.
+[EL Config]: metadata: 2025-05-09 23:05:44.045--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [orderDate] is being defaulted to: ORDERDATE.
+[EL Config]: metadata: 2025-05-09 23:05:44.045--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Course] is being defaulted to: Course.
+[EL Config]: metadata: 2025-05-09 23:05:44.045--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [thumbnail] is being defaulted to: THUMBNAIL.
+[EL Config]: metadata: 2025-05-09 23:05:44.046--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [price] is being defaulted to: PRICE.
+[EL Config]: metadata: 2025-05-09 23:05:44.046--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [title] is being defaulted to: TITLE.
+[EL Config]: metadata: 2025-05-09 23:05:44.046--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [courseId] is being defaulted to: COURSEID.
+[EL Config]: metadata: 2025-05-09 23:05:44.047--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Chapter] is being defaulted to: Chapter.
+[EL Config]: metadata: 2025-05-09 23:05:44.048--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [chapterOrder] is being defaulted to: CHAPTERORDER.
+[EL Config]: metadata: 2025-05-09 23:05:44.048--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [chapterId] is being defaulted to: CHAPTERID.
+[EL Config]: metadata: 2025-05-09 23:05:44.048--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [title] is being defaulted to: TITLE.
+[EL Config]: metadata: 2025-05-09 23:05:44.049--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Users] is being defaulted to: Users.
+[EL Config]: metadata: 2025-05-09 23:05:44.049--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2025-05-09 23:05:44.05--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.FileMedia] is being defaulted to: FileMedia.
+[EL Config]: metadata: 2025-05-09 23:05:44.05--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [fileName] is being defaulted to: FILENAME.
+[EL Config]: metadata: 2025-05-09 23:05:44.05--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [fileUrl] is being defaulted to: FILEURL.
+[EL Config]: metadata: 2025-05-09 23:05:44.051--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2025-05-09 23:05:44.051--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [fileType] is being defaulted to: FILETYPE.
+[EL Config]: metadata: 2025-05-09 23:05:44.051--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [fileId] is being defaulted to: FILEID.
+[EL Config]: metadata: 2025-05-09 23:05:44.052--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Submission] is being defaulted to: Submission.
+[EL Config]: metadata: 2025-05-09 23:05:44.052--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [submissId] is being defaulted to: SUBMISSID.
+[EL Config]: metadata: 2025-05-09 23:05:44.052--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [score] is being defaulted to: SCORE.
+[EL Config]: metadata: 2025-05-09 23:05:44.053--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [completedAt] is being defaulted to: COMPLETEDAT.
+[EL Config]: metadata: 2025-05-09 23:05:44.053--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The column name for element [status] is being defaulted to: STATUS.
+[EL Config]: metadata: 2025-05-09 23:05:44.053--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Admin] is being defaulted to: Admin.
+[EL Config]: metadata: 2025-05-09 23:05:44.054--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the inheritance class [class Model.Admin] is being defaulted to: account_id.
+[EL Config]: metadata: 2025-05-09 23:05:44.054--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The alias name for the entity class [class Model.Student] is being defaulted to: Student.
+[EL Config]: metadata: 2025-05-09 23:05:44.054--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the inheritance class [class Model.Student] is being defaulted to: account_id.
+[EL Config]: metadata: 2025-05-09 23:05:44.07--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field options] is being defaulted to: ID.
+[EL Config]: metadata: 2025-05-09 23:05:44.073--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field applicableDays] is being defaulted to: DESCRIPTIONID.
+[EL Config]: metadata: 2025-05-09 23:05:44.074--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field studentResult] is being defaulted to: SUBMISSID.
+[EL Config]: metadata: 2025-05-09 23:05:44.081--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field assessment] is being defaulted to: ASSESSMENTID.
+[EL Config]: metadata: 2025-05-09 23:05:44.081--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field student] is being defaulted to: account_id.
+[EL Config]: metadata: 2025-05-09 23:05:44.082--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field course] is being defaulted to: COURSEID.
+[EL Config]: metadata: 2025-05-09 23:05:44.082--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field chapter] is being defaulted to: CHAPTERID.
+[EL Config]: metadata: 2025-05-09 23:05:44.082--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field order] is being defaulted to: order_id.
+[EL Config]: metadata: 2025-05-09 23:05:44.082--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field student] is being defaulted to: account_id.
+[EL Config]: metadata: 2025-05-09 23:05:44.083--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field course] is being defaulted to: COURSEID.
+[EL Config]: metadata: 2025-05-09 23:05:44.083--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field teacher] is being defaulted to: account_id.
+[EL Config]: metadata: 2025-05-09 23:05:44.083--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field category] is being defaulted to: CATEGORYID.
+[EL Config]: metadata: 2025-05-09 23:05:44.084--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field course] is being defaulted to: COURSEID.
+[EL Config]: metadata: 2025-05-09 23:05:44.084--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field lesson] is being defaulted to: LESSONID.
+[EL Config]: metadata: 2025-05-09 23:05:44.084--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field assessment] is being defaulted to: ASSESSMENTID.
+[EL Config]: metadata: 2025-05-09 23:05:44.085--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--The primary key column name for the mapping element [field student] is being defaulted to: account_id.
+[EL Info]: 2025-05-09 23:05:44.257--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--EclipseLink, version: Eclipse Persistence Services - 4.0.2.v202306161219
+[EL Fine]: connection: 2025-05-09 23:05:44.828--Thread(Thread[#1,main,5,main])--Detected database platform: org.eclipse.persistence.platform.database.MySQLPlatform
+[EL Fine]: connection: 2025-05-09 23:05:44.841--ServerSession(350059321)--Connection(1424788681)--Thread(Thread[#1,main,5,main])--connecting(DatabaseLogin(
+	platform=>MySQLPlatform
+	user name=> "root"
+	datasource URL=> "jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC"
+))
+[EL Config]: connection: 2025-05-09 23:05:44.9--ServerSession(350059321)--Connection(465909321)--Thread(Thread[#1,main,5,main])--Connected: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC
+	User: root@localhost
+	Database: MySQL  Version: 9.2.0
+	Driver: MySQL Connector/J  Version: mysql-connector-j-8.0.33 (Revision: 7d6b0800528b6b25c68b52dc10d6c1c8429c100c)
+[EL Warning]: metadata: 2025-05-09 23:05:44.913--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [lesson] for the entity class [class Model.FileMedia] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.914--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [course] for the entity class [class Model.Description] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.915--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [student] for the entity class [class Model.NotificationRequest] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.915--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [student] for the entity class [class Model.Order] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.915--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [course] for the entity class [class Model.Order] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.915--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [payment] for the entity class [class Model.Order] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.916--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [assessment] for the entity class [class Model.Submission] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.916--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [student] for the entity class [class Model.Submission] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.917--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [teacher] for the entity class [class Model.Course] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.917--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [description] for the entity class [class Model.Course] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.917--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [category] for the entity class [class Model.Course] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.917--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [course] for the entity class [class Model.Chapter] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.918--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [assessment] for the entity class [class Model.Question] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.918--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [order] for the entity class [class Model.Payment] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.918--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [chapter] for the entity class [class Model.Lesson] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.919--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [student] for the entity class [class Model.Review] since weaving was not enabled or did not occur.
+[EL Warning]: metadata: 2025-05-09 23:05:44.919--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [course] for the entity class [class Model.Review] since weaving was not enabled or did not occur.
+[EL Fine]: connection: 2025-05-09 23:05:44.954--ServerSession(350059321)--Thread(Thread[#1,main,5,main])--/file:/C:/Users/LENOVO/OneDrive/Tài liệu/NetBeansProjects/el1/target/classes/_MyWebAppPU login successful
+[EL Fine]: 2025-05-09 23:05:44.977--Thread(Thread[#1,main,5,main])--JsonPlatformProvider class org.eclipse.persistence.pgsql.PostgreSQLJsonPlatformProvider was not found
+[EL Fine]: 2025-05-09 23:05:44.987--Thread(Thread[#1,main,5,main])--JsonPlatformProvider class org.eclipse.persistence.platform.database.oracle.json.OracleJsonPlatformProvider was not found
+[EL Fine]: 2025-05-09 23:05:44.987--Thread(Thread[#1,main,5,main])--JsonPlatformProvider class org.eclipse.persistence.json.DefaultJsonPlatformProvider was not found
+[EL Config]: metadata: 2025-05-09 23:05:44.999--Thread(Thread[#1,main,5,main])--The default table generator could not locate or convert a java type (class ENum.ScheduleDay) into a database type for database field (description_schedule.schedule_day). The generator uses "java.lang.String" as default java type for the field.
+[EL Fine]: sql: 2025-05-09 23:05:45.152--ClientSession(1274225913)--Connection(465909321)--Thread(Thread[#1,main,5,main])--INSERT INTO accounts (AVATAR, EMAIL, ISACTIVE, PASSWORD, PHONE, USERNAME, DTYPE) VALUES (?, ?, ?, ?, ?, ?, ?)
+	bind => [/path/to/avatar, testuser@example.com, true, password123, 1234567890, testuser, Account]
+[EL Fine]: sql: 2025-05-09 23:05:45.193--ClientSession(1274225913)--Thread(Thread[#1,main,5,main])--SELECT 1
+[EL Warning]: 2025-05-09 23:05:45.194--UnitOfWork(669700766)--Thread(Thread[#1,main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 4.0.2.v202306161219): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'testuser@example.com' for key 'accounts.EMAIL'
+Error Code: 1062
+Call: INSERT INTO accounts (AVATAR, EMAIL, ISACTIVE, PASSWORD, PHONE, USERNAME, DTYPE) VALUES (?, ?, ?, ?, ?, ?, ?)
+	bind => [/path/to/avatar, testuser@example.com, true, password123, 1234567890, testuser, Account]
+Query: InsertObjectQuery(Model.Account@111610e6)
+]]></system-out>
+  </testcase>
+</testsuite>

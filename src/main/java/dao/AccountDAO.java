@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
-import model.Account; // Import lớp Account của bạn
+import Model.Account; // Import lớp Account của bạn
 
 public class AccountDAO {
 

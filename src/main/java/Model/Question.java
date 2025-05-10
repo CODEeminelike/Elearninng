@@ -1,4 +1,5 @@
-package model;
+package Model;
+
 
 import jakarta.persistence.*; // Hoặc javax.persistence.* tùy phiên bản Jakarta EE/Java EE
 import java.util.ArrayList;
