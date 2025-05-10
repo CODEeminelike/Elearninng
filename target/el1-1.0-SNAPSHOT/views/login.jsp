@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <div class="col text-end">
-                    <a href="#!">Quên mật khẩu?</a>
+                    <a href="/el1/views/ForgotPassword.jsp">Quên mật khẩu?</a>
                 </div>
             </div>
             <!-- Submit button -->

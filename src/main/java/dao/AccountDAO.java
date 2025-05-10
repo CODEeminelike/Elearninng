@@ -81,7 +81,75 @@ public class AccountDAO {
         }
     }
     
+    public Account findById(Long accountId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            return em.find(Account.class, accountId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+    public boolean updateAccount(Account account) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(account);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
     
+    public boolean updatePasswordByEmail(String email, String newPlainPassword) {
+    EntityManager em = factory.createEntityManager();
+    try {
+        em.getTransaction().begin();
 
+        TypedQuery<Account> query = em.createQuery(
+            "SELECT a FROM Account a WHERE a.email = :email AND a.isActive = true", Account.class);
+        query.setParameter("email", email);
+
+        Account accountToUpdate;
+        try {
+            accountToUpdate = query.getSingleResult();
+        } catch (NoResultException e) {
+            accountToUpdate = null; // Không tìm thấy tài khoản phù hợp
+        }
+
+        if (accountToUpdate != null) {
+            // GÁN TRỰC TIẾP MẬT KHẨU MỚI (KHÔNG BĂM)
+            // LƯU Ý: Đây là một lỗ hổng bảo mật nghiêm trọng.
+            accountToUpdate.setPassword(newPlainPassword);
+
+            em.merge(accountToUpdate);
+            em.getTransaction().commit();
+            return true; // Cập nhật thành công
+        } else {
+            // Không tìm thấy tài khoản với email này hoặc tài khoản không hoạt động
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            return false; // Cập nhật thất bại
+        }
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+        e.printStackTrace(); // Ghi lại thông tin lỗi
+        return false; // Cập nhật thất bại do lỗi
+    } finally {
+        em.close();
+    }
+}
     // Có thể thêm các phương thức khác như findById, updateAccount, deleteAccount...
 }

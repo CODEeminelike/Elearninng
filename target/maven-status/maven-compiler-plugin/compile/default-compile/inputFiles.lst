@@ -1,7 +1,9 @@
+C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\PasswordResetTokenDAO.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\ENum\PaymentStatus.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Controller\UsersJpaController.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\ENum\ScheduleDay.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\AccountDAO.java
+C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\PasswordResetToken.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\DescriptionDAO.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Util\ValidationUtil.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Lesson.java
@@ -14,11 +16,13 @@ C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\CourseDAO.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\dao\ChapterDAO.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Submission.java
+C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Controller\ResetPasswordServlet.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Payment.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Controller\LoginServlet.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Controller\RegisterServlet.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\ENum\SubmissionStatus.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Controller\UserServlet.java
+C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Util\EmailUtil.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\FileMedia.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Question.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\com\mycompany\el1\JakartaRestConfiguration.java
@@ -28,6 +32,7 @@ C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\ENum\P
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Assessment.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Order.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Account.java
+C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Controller\ForgotPasswordServlet.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\Model\Chapter.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\test\test.java
 C:\Users\LENOVO\OneDrive\Tài liệu\NetBeansProjects\el1\src\main\java\com\mycompany\el1\resources\JakartaEE10Resource.java

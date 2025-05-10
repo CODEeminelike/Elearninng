@@ -1,5 +1,6 @@
 Controller\LoginServlet.class
 dao\ChapterDAO.class
+Model\PasswordResetToken.class
 Controller\RegisterServlet.class
 ENum\PaymentStatus.class
 Model\NotificationRequest.class
@@ -17,6 +18,8 @@ Model\Payment.class
 Model\Submission.class
 Model\Admin.class
 ENum\PaymentMethod.class
+Util\EmailUtil$1.class
+Util\EmailUtil.class
 Model\Question.class
 com\mycompany\el1\JakartaRestConfiguration.class
 Model\Teacher.class
@@ -24,14 +27,17 @@ Model\Account.class
 dao\CourseDAO.class
 ENum\ScheduleDay.class
 dao\DescriptionDAO.class
+dao\PasswordResetTokenDAO.class
 Model\Users.class
 Model\FileMedia.class
 Model\Description.class
+Controller\ForgotPasswordServlet.class
 Model\Course.class
 Model\Lesson.class
 Util\ValidationUtil.class
 Controller\LogoutServlet.class
 test\test.class
 Model\Review.class
+Controller\ResetPasswordServlet.class
 Controller\UsersJpaController.class
 ENum\EStatus.class
