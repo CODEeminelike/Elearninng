@@ -27,6 +27,7 @@ Model\Course.class
 Model\Lesson.class
 Util\ValidationUtil.class
 Controller\LogoutServlet.class
+test\test.class
 Model\Review.class
 Controller\UsersJpaController.class
 ENum\EStatus.class

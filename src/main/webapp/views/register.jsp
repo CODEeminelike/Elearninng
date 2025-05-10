@@ -4,22 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>??ng Ký Tài Kho?n</title>
-    <style>
-        .error {
-            color: red;
-            font-size: 0.9em;
-            margin-top: 5px;
-            display: block;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .server-error {
-            color: red;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-    </style>
+   
 </head>
 <body>
 

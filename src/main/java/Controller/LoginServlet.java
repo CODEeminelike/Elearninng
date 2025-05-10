@@ -1,4 +1,5 @@
 package Controller;
+import org.mindrot.jbcrypt.BCrypt;
 
 import dao.AccountDAO; // Import lớp DAO của bạn
 import Model.Account; // Import lớp Model của bạn
@@ -15,7 +16,13 @@ import java.io.IOException;
 @WebServlet("/login") // Map Servlet tới URL /login
 public class LoginServlet extends HttpServlet {
 
-    private AccountDAO accountDAO;
+      private AccountDAO accountDAO;
+
+    @Override
+    public void init() throws ServletException {
+        // Khởi tạo AccountDAO
+        accountDAO = new AccountDAO();
+    }
 
    
 
@@ -40,12 +47,12 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("loggedInAccount", account); // Lưu thông tin người dùng vào session
 
             // Chuyển hướng đến trang chào mừng hoặc trang chính
-            response.sendRedirect(request.getContextPath() + "/home"); // Ví dụ: chuyển hướng đến /home
+            response.sendRedirect(request.getContextPath() + "/views/home.jsp"); // Ví dụ: chuyển hướng đến /home
         } else {
             // Đăng nhập thất bại
             request.setAttribute("errorMessage", "Tên đăng nhập hoặc mật khẩu không chính xác.");
             // Quay lại trang đăng nhập và hiển thị lỗi
-            request.getRequestDispatcher("views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
         }
     }
 
