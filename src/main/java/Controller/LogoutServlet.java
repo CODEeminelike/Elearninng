@@ -9,22 +9,31 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/logout") // Map Servlet tới URL /logout
+@WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false); // Lấy session hiện tại, không tạo mới
+        // Thêm header chống cache
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+
+        // Hủy session
+        HttpSession session = request.getSession(false);
         if (session != null) {
-            session.invalidate(); // Hủy bỏ session
+            session.invalidate();
         }
-        // Chuyển hướng về trang đăng nhập hoặc trang chủ
-        response.sendRedirect(request.getContextPath() + "/views/Login.jsp"); // Ví dụ: chuyển hướng đến /login
+
+        // Thêm thông báo đăng xuất
+        request.setAttribute("message", "You have been logged out successfully");
+
+        // Chuyển tiếp đến trang đăng nhập
+        request.getRequestDispatcher("/views/LoginForStaff.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Thường thì logout được xử lý bằng GET, nhưng cũng có thể cho phép POST
         doGet(request, response);
     }
 }

@@ -69,6 +69,6 @@
         </form>
     </div>
 
-        <p><a href="${pageContext.request.contextPath}/staff_login.jsp">Back to Login</a></p>
+       
 </body>
 </html>

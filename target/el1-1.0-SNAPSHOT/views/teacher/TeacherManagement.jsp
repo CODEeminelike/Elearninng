@@ -130,8 +130,7 @@
     <c:if test="${empty teachers and empty errorMessage}">
         <p>No teachers displayed. Click 'Show Teachers' to load the list.</p>
     </c:if>
-
-    <p><a href="${pageContext.request.contextPath}/staff_login.jsp">Back to Login</a></p>
+  
     <p><a href="${pageContext.request.contextPath}/create-teacher">Create New Teacher</a></p>
 </body>
 </html>

@@ -38,6 +38,7 @@ Model\Admin.class
 ENum\PaymentMethod.class
 dao\TeacherDAO.class
 com\mycompany\el1\JakartaRestConfiguration.class
+Util\AuthFilter.class
 dao\CourseDAO.class
 ENum\ScheduleDay.class
 dao\DescriptionDAO.class

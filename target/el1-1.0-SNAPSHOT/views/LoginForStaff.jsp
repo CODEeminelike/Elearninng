@@ -15,11 +15,11 @@
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br><br>
 
-        <label for="role">Role:</label><br>
+<!--        <label for="role">Role:</label><br>
         <select id="role" name="role" required>
             <option value="teacher">Teacher</option>
             <option value="admin">Admin</option>
-        </select><br><br>
+        </select><br><br>-->
 
         <button type="submit">Login</button>
     </form>
