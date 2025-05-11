@@ -8,6 +8,8 @@ import jakarta.persistence.TypedQuery;
 import Model.Account; // Import lớp Account của bạn
 import Model.Admin;
 import Model.Teacher;
+import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class AccountDAO {
 
@@ -154,17 +156,11 @@ public class AccountDAO {
         }
     }
         
-    // Phương thức mới để kiểm tra vai trò Teacher
     public boolean isTeacher(Long accountId) {
         EntityManager em = factory.createEntityManager();
         try {
-            TypedQuery<Teacher> query = em.createQuery(
-                "SELECT t FROM Teacher t WHERE t.accountId = :accountId", Teacher.class);
-            query.setParameter("accountId", accountId);
-            query.getSingleResult();
-            return true;
-        } catch (NoResultException e) {
-            return false;
+            Teacher teacher = em.find(Teacher.class, accountId);
+            return teacher != null;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -173,17 +169,11 @@ public class AccountDAO {
         }
     }
 
-    // Phương thức mới để kiểm tra vai trò Admin
     public boolean isAdmin(Long accountId) {
         EntityManager em = factory.createEntityManager();
         try {
-            TypedQuery<Admin> query = em.createQuery(
-                "SELECT a FROM Admin a WHERE a.accountId = :accountId", Admin.class);
-            query.setParameter("accountId", accountId);
-            query.getSingleResult();
-            return true;
-        } catch (NoResultException e) {
-            return false;
+            Admin admin = em.find(Admin.class, accountId);
+            return admin != null;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -191,5 +181,40 @@ public class AccountDAO {
             em.close();
         }
     }
+    
+    // Phương thức mới để tạo tài khoản
+    public Account createAccount(String username, String password, String email, String phone, String avatar, boolean isActive) throws Exception {
+        EntityManager em = factory.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            
+            // Kiểm tra xem username hoặc email đã tồn tại chưa
+            Account existingAccount = findByUsernameOrEmail(username, email);
+            if (existingAccount != null) {
+                throw new Exception("Username or email already exists: " + username + " / " + email);
+            }
+
+            // Tạo tài khoản mới
+            Account account = new Account();
+            account.setUsername(username);
+            account.setPassword(BCrypt.hashpw(password, BCrypt.gensalt())); // Băm mật khẩu bằng BCrypt
+            account.setEmail(email);
+            account.setPhone(phone);
+            account.setAvatar(avatar);
+            account.setActive(isActive);
+
+            em.persist(account);
+            em.getTransaction().commit();
+            return account;
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new Exception("Error creating account: " + e.getMessage());
+        } finally {
+            em.close();
+        }
+    }
+    
     // Có thể thêm các phương thức khác như findById, updateAccount, deleteAccount...
 }

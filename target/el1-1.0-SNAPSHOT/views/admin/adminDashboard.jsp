@@ -21,7 +21,14 @@
         <p style="color: red">${error}</p>
     </c:if>
 
-    <p>This is the dashboard for admins. You can manage users and system settings here.</p>
+        
+        
+    <a href="/el1/views/admin/AdminManagment.jsp">Thêm Accont cho Admint</a> 
+    
     <a href="<%= request.getContextPath() %>/logout">Logout</a>
+    
+    <a href="${pageContext.request.contextPath}/teacher-management">Manage Teachers</a>
+    
+    
 </body>
 </html>

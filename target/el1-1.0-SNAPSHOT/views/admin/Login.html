@@ -128,7 +128,7 @@
             <h2>StarAdmin</h2>
             <p class="subtitle">Hello! let's get started</p>
             <p class="info-text">Sign in to continue.</p>
-            <form action="#">
+              <form id="loginForm" action="<%= request.getContextPath() %>/stafflogin" method="POST">
                 <div class="form-group">
                     <input type="text" id="username" name="username" placeholder="Username" required>
                 </div>

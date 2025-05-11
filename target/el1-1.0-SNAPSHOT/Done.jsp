@@ -1,71 +1,78 @@
-<%--
-    Document     : Done.jsp
-    Created on : May 10, 2025, 1:42:26 PM
-    Author       : LENOVO
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="Model.PasswordResetToken"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Danh sách Token</title>
-        <style>
-            table {
-                width: 80%;
-                border-collapse: collapse;
-                margin: 20px auto;
-            }
-            th, td {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-            th {
-                background-color: #f2f2f2;
-            }
-            tr:nth-child(even) {
-                background-color: #f9f9f9;
-            }
-            h1 {
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Danh sách tất cả Token đặt lại mật khẩu</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .error {
+            color: red;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Teacher List</h2>
 
-        <%-- Lấy danh sách token từ request attribute --%>
-        <%
-            List<PasswordResetToken> tokenList = (List<PasswordResetToken>) request.getAttribute("allTokens");
-        %>
+    <!-- Hiển thị thông báo lỗi nếu có -->
+    <c:if test="${not empty errorMessage}">
+        <p class="error">${errorMessage}</p>
+    </c:if>
 
-        <%-- Kiểm tra nếu danh sách không rỗng --%>
-        <% if (tokenList != null && !tokenList.isEmpty()) { %>
-            <table>
-                <thead>
+    <!-- Hiển thị danh sách Teacher -->
+    <c:if test="${not empty teachers}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Account ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Avatar</th>
+                    <th>Active</th>
+                    <th>Name</th>
+                    <th>Bio</th>
+                    <th>Qualifications</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="teacher" items="${teachers}">
                     <tr>
-                        <th>Email</th>
-                        <th>Token</th>
-                        <th>Ngày hết hạn</th>
+                        <td>${teacher.accountId}</td>
+                        <td>${teacher.username}</td>
+                        <td>${teacher.email}</td>
+                        <td>${teacher.phone}</td>
+                        <td>${teacher.avatar}</td>
+                        <td>${teacher.active ? 'Yes' : 'No'}</td>
+                        <td>${teacher.name}</td>
+                        <td>${teacher.bio}</td>
+                        <td>${teacher.qualifications}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    <%-- Lặp qua danh sách và hiển thị từng token --%>
-                    <% for (PasswordResetToken token : tokenList) { %>
-                        <tr>
-                            <td><%= token.getEmail() %></td>
-                            <td><%= token.getToken() %></td>
-                            <td><%= token.getExpiryDate() %></td>
-                        </tr>
-                    <% } %>
-                </tbody>
-            </table>
-        <% } else { %>
-            <p style="text-align: center;">Không tìm thấy token nào trong cơ sở dữ liệu.</p>
-        <% } %>
+                </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+    <c:if test="${empty teachers}">
+        <p>No teachers found.</p>
+    </c:if>
 
-    </body>
+    <p><a href="${pageContext.request.contextPath}/staff_login.jsp">Back to Login</a></p>
+</body>
 </html>
