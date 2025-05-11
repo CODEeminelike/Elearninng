@@ -6,6 +6,8 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import Model.Account; // Import lớp Account của bạn
+import Model.Admin;
+import Model.Teacher;
 
 public class AccountDAO {
 
@@ -109,47 +111,85 @@ public class AccountDAO {
             em.close();
         }
     }
-    
-    public boolean updatePasswordByEmail(String email, String newPlainPassword) {
-    EntityManager em = factory.createEntityManager();
-    try {
-        em.getTransaction().begin();
 
-        TypedQuery<Account> query = em.createQuery(
-            "SELECT a FROM Account a WHERE a.email = :email AND a.isActive = true", Account.class);
-        query.setParameter("email", email);
-
-        Account accountToUpdate;
+        public boolean updatePasswordByEmail(String email, String newPlainPassword) {
+        EntityManager em = factory.createEntityManager();
         try {
-            accountToUpdate = query.getSingleResult();
-        } catch (NoResultException e) {
-            accountToUpdate = null; // Không tìm thấy tài khoản phù hợp
-        }
+            em.getTransaction().begin();
 
-        if (accountToUpdate != null) {
-            // GÁN TRỰC TIẾP MẬT KHẨU MỚI (KHÔNG BĂM)
-            // LƯU Ý: Đây là một lỗ hổng bảo mật nghiêm trọng.
-            accountToUpdate.setPassword(newPlainPassword);
+            TypedQuery<Account> query = em.createQuery(
+                "SELECT a FROM Account a WHERE a.email = :email AND a.isActive = true", Account.class);
+            query.setParameter("email", email);
 
-            em.merge(accountToUpdate);
-            em.getTransaction().commit();
-            return true; // Cập nhật thành công
-        } else {
-            // Không tìm thấy tài khoản với email này hoặc tài khoản không hoạt động
+            Account accountToUpdate;
+            try {
+                accountToUpdate = query.getSingleResult();
+            } catch (NoResultException e) {
+                accountToUpdate = null; // Không tìm thấy tài khoản phù hợp
+            }
+
+            if (accountToUpdate != null) {
+                // GÁN TRỰC TIẾP MẬT KHẨU MỚI (KHÔNG BĂM)
+                // LƯU Ý: Đây là một lỗ hổng bảo mật nghiêm trọng.
+                accountToUpdate.setPassword(newPlainPassword);
+
+                em.merge(accountToUpdate);
+                em.getTransaction().commit();
+                return true; // Cập nhật thành công
+            } else {
+                // Không tìm thấy tài khoản với email này hoặc tài khoản không hoạt động
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+                return false; // Cập nhật thất bại
+            }
+        } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            return false; // Cập nhật thất bại
+            e.printStackTrace(); // Ghi lại thông tin lỗi
+            return false; // Cập nhật thất bại do lỗi
+        } finally {
+            em.close();
         }
-    } catch (Exception e) {
-        if (em.getTransaction().isActive()) {
-            em.getTransaction().rollback();
-        }
-        e.printStackTrace(); // Ghi lại thông tin lỗi
-        return false; // Cập nhật thất bại do lỗi
-    } finally {
-        em.close();
     }
-}
+        
+    // Phương thức mới để kiểm tra vai trò Teacher
+    public boolean isTeacher(Long accountId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            TypedQuery<Teacher> query = em.createQuery(
+                "SELECT t FROM Teacher t WHERE t.accountId = :accountId", Teacher.class);
+            query.setParameter("accountId", accountId);
+            query.getSingleResult();
+            return true;
+        } catch (NoResultException e) {
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+
+    // Phương thức mới để kiểm tra vai trò Admin
+    public boolean isAdmin(Long accountId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            TypedQuery<Admin> query = em.createQuery(
+                "SELECT a FROM Admin a WHERE a.accountId = :accountId", Admin.class);
+            query.setParameter("accountId", accountId);
+            query.getSingleResult();
+            return true;
+        } catch (NoResultException e) {
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
     // Có thể thêm các phương thức khác như findById, updateAccount, deleteAccount...
 }

@@ -1,22 +1,33 @@
 package test;
 
+import Model.Account;
+import Model.Admin;
 import dao.AccountDAO; // Vẫn giữ nguyên, có thể dùng cho các mục đích khác sau này
 import Util.EmailUtil; // Vẫn giữ nguyên
 import dao.PasswordResetTokenDAO;
 import Model.PasswordResetToken; // Import lớp Model
 import jakarta.mail.MessagingException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime; // Vẫn giữ nguyên
 import java.util.UUID; // Vẫn giữ nguyên
 import java.util.List; // Import List để làm việc với danh sách token
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "TestServlet", urlPatterns = {"/test"})
 public class test extends HttpServlet {
+    private static final String PERSISTENCE_UNIT_NAME = "MyWebAppPU"; // Thay bằng tên Persistence Unit của bạn
+    private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMIN_PASSWORD = "123456";
+    private static final String ADMIN_EMAIL = "monnkkey2004@gmail.com";
 
     private AccountDAO accountDAO;
     private PasswordResetTokenDAO tokenDAO;
@@ -31,34 +42,37 @@ public class test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Phương thức GET sẽ được sử dụng để hiển thị danh sách token
-        response.setContentType("text/html;charset=UTF-8");
+           // Lấy thông tin từ form
+        String username = "admin";
+        String password = "123456";
+        String role = "admin";
 
-        try {
-            
-             // Tạo token
-            String token = UUID.randomUUID().toString();
-            LocalDateTime expiryDate = LocalDateTime.now().plusHours(1);
-            tokenDAO.saveToken("108@gmail.com", token, expiryDate);
+        // Kiểm tra thông tin đăng nhập
+        Account account = accountDAO.findByUsernameAndPassword(username, password);
 
-            // Lấy tất cả các token từ cơ sở dữ liệu
-            List<PasswordResetToken> allTokens = tokenDAO.findAllToken();
+        // Nếu tài khoản tồn tại và hoạt động
+        if (account != null && account.isActive()) {
+            // Lưu tài khoản vào session
+            HttpSession session = request.getSession();
+            session.setAttribute("account", account);
 
-            // Đặt danh sách token vào request attribute
-            request.setAttribute("allTokens", allTokens);
-
-            // Chuyển tiếp yêu cầu đến trang Done.jsp để hiển thị
-            request.getRequestDispatcher("/Done.jsp").forward(request, response);
-
-        } catch (Exception e) {
-            // Xử lý lỗi nếu có
-            System.err.println("Loi truy xuat " + e.getMessage());
-            e.printStackTrace();
-
-            // Đặt thông báo lỗi vào request và chuyển tiếp đến trang lỗi
-            request.setAttribute("errorMessage", "Loi lay danh sách: " + e.getMessage());
+            // Điều hướng dựa trên vai trò
+            Long accountId = account.getAccountId();
+            if ("teacher".equalsIgnoreCase(role) && accountDAO.isTeacher(accountId)) {
+                response.sendRedirect(request.getContextPath() + "/views/teacher/teacherDashboard.jsp");
+            } else if ("admin".equalsIgnoreCase(role) && accountDAO.isAdmin(accountId)) {
+                response.sendRedirect(request.getContextPath() + "/views/admin/adminDashboard.jsp");
+            } else {
+                // Vai trò không khớp hoặc tài khoản không thuộc loại tương ứng
+                request.setAttribute("error", "Invalid role or account type.");
+                request.getRequestDispatcher("/ERROR.jsp").forward(request, response);
+            }
+        } else {
+            // Đăng nhập thất bại
+            request.setAttribute("error", "Invalid username or password.");
             request.getRequestDispatcher("/ERROR.jsp").forward(request, response);
         }
+     
     }
 
     @Override

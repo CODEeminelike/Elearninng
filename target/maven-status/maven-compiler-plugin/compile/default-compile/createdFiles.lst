@@ -9,10 +9,12 @@ dao\CategoryDAO.class
 Model\Category.class
 dao\AccountDAO.class
 Model\Order.class
+Controller\StaffLoginServlet.class
 ENum\SubmissionStatus.class
 com\mycompany\el1\resources\JakartaEE10Resource.class
 Model\Chapter.class
 Model\Assessment.class
+Util\PasswordUtil.class
 Controller\UserServlet.class
 Model\Payment.class
 Model\Submission.class
@@ -22,6 +24,7 @@ Util\EmailUtil$1.class
 Util\EmailUtil.class
 Model\Question.class
 com\mycompany\el1\JakartaRestConfiguration.class
+test\SetupAdmin.class
 Model\Teacher.class
 Model\Account.class
 dao\CourseDAO.class

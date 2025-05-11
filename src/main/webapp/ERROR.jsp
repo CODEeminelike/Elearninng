@@ -1,54 +1,24 @@
-<%-- 
-    Document   : ERROR
-    Created on : May 10, 2025, 1:46:41 PM (Ngày này có thể giữ nguyên hoặc cập nhật)
-    Author     : LENOVO (Tên tác giả)
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Thông Báo Lỗi</title> <%-- Thay đổi tiêu đề cho rõ ràng hơn --%>
-        <style>
-            body { font-family: Arial, sans-serif; margin: 20px; }
-            .error-container { border: 1px solid #cc0000; background-color: #ffeeee; padding: 15px; }
-            .error-title { color: #cc0000; font-size: 24px; }
-            .error-message { margin-top: 10px; font-size: 16px; }
-        </style>
-    </head>
-    <body>
-        <div class="error-container">
-            <h1 class="error-title">Đã có sự cố xảy ra!</h1>
-            
-            <%-- Kiểm tra xem có thuộc tính lỗi không và hiển thị nó --%>
-            <c:if test="${not empty thongDiepLoiEmail}">
-                <p class="error-message">
-                    <strong>Chi tiết lỗi gửi email:</strong> ${thongDiepLoiEmail}
-                </p>
-            </c:if>
-            
-            <%-- Nếu bạn không sử dụng JSTL (c:if), bạn có thể dùng scriptlet (ít được khuyến khích hơn) --%>
-            <%-- 
-            <% 
-                String errorMessage = (String) request.getAttribute("thongDiepLoiEmail");
-                if (errorMessage != null && !errorMessage.isEmpty()) {
-            %>
-                <p class="error-message">
-                    <strong>Chi tiết lỗi gửi email:</strong> <%= errorMessage %>
-                </p>
-            <%
-                } else {
-            %>
-                <p class="error-message">
-                    Không có thông tin chi tiết về lỗi. Vui lòng kiểm tra nhật ký máy chủ.
-                </p>
-            <%
-                }
-            %>
-            --%>
-            
-            <p><a href="${pageContext.request.contextPath}/">Quay lại trang chủ</a></p>
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+    <h2>Error Occurred</h2>
+    
+    <!-- Hiển thị thông báo lỗi nếu có -->
+    <c:if test="${not empty error}">
+        <p style="color: red">${error}</p>
+    </c:if>
+    
+    <!-- Mặc định hiển thị thông báo chung nếu không có lỗi cụ thể -->
+    <c:if test="${empty error}">
+        <p style="color: red">An unexpected error occurred.</p>
+    </c:if>
+    
+    <p><a href="<%= request.getContextPath() %>/staff_login.jsp">Back to Login</a></p>
+</body>
 </html>
