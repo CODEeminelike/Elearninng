@@ -1,68 +1,103 @@
-package DAO;
+package dao;
 
-import Model.Category;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
+import Model.Category;
 import java.util.List;
 
 public class CategoryDAO {
 
-    private EntityManager entityManager;
+    private static final String PERSISTENCE_UNIT_NAME = "MyWebAppPU";
+    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
-    public CategoryDAO(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    public void save(Category category) {
-        EntityTransaction transaction = entityManager.getTransaction();
+    public boolean saveCategory(Category category) {
+        EntityManager em = factory.createEntityManager();
         try {
-            transaction.begin();
-            entityManager.persist(category);
-            transaction.commit();
+            em.getTransaction().begin();
+            if (category.getCategoryId() == null) {
+                em.persist(category);
+            } else {
+                em.merge(category);
+            }
+            em.getTransaction().commit();
+            return true;
         } catch (Exception e) {
-            transaction.rollback();
-            throw e;
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
         }
     }
 
-    public Category findById(Long id) {
-        return entityManager.find(Category.class, id);
+    public Category findById(Long categoryId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            return em.find(Category.class, categoryId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
     }
 
     public List<Category> findAll() {
-        return entityManager.createQuery("SELECT c FROM Category c", Category.class).getResultList();
+        EntityManager em = factory.createEntityManager();
+        try {
+            TypedQuery<Category> query = em.createQuery("SELECT c FROM Category c", Category.class);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean deleteCategory(Long categoryId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Category category = em.find(Category.class, categoryId);
+            if (category != null) {
+                em.remove(category);
+                em.getTransaction().commit();
+                return true;
+            }
+            em.getTransaction().commit();
+            return false;
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
     }
 
     public Category findByName(String name) {
-        return entityManager.createQuery("SELECT c FROM Category c WHERE c.name = :name", Category.class)
-                .setParameter("name", name)
-                .getSingleResult();
-    }
-
-    public void update(Category category) {
-        EntityTransaction transaction = entityManager.getTransaction();
+        EntityManager em = factory.createEntityManager();
         try {
-            transaction.begin();
-            entityManager.merge(category);
-            transaction.commit();
+            TypedQuery<Category> query = em.createQuery(
+                "SELECT c FROM Category c WHERE c.name = :name", Category.class);
+            query.setParameter("name", name);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         } catch (Exception e) {
-            transaction.rollback();
-            throw e;
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
         }
     }
-
-    public void delete(Long id) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        try {
-            transaction.begin();
-            Category category = entityManager.find(Category.class, id);
-            if (category != null) {
-                entityManager.remove(category);
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            transaction.rollback();
-            throw e;
-        }
-    }
+    
 }

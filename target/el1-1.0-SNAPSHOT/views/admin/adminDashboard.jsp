@@ -96,6 +96,8 @@
                 <ul>
                     <li><a href="javascript:void(0)" onclick="loadPage('adminManagement')"><span class="icon">&#128187;</span> Tạo Admin Account</a></li>
                     <li><a href="javascript:void(0)" onclick="loadPage('employeeManagement')"><span class="icon">&#128221;</span> Quản lí nhân viên</a></li>
+                    <li><a href="javascript:void(0)" onclick="loadPage('manageCourses')"><span class="icon">&#128218;</span> Quản lí khóa học</a></li>
+
                     <li><a href="<%= request.getContextPath() %>/logout"><span class="icon">&#128274;</span> Logout</a></li>
                 </ul>
             </nav>
@@ -118,6 +120,10 @@
                 case 'employeeManagement':
                     frame.src = "<%= request.getContextPath() %>/teacher-management";
                     break;
+                case 'manageCourses':
+    frame.src = "<%= request.getContextPath() %>/views/admin/managecourses.jsp";
+    break;
+
                 default:
                     frame.src = "about:blank";
             }

@@ -29,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
         request.setAttribute("message", "You have been logged out successfully");
 
         // Chuyển tiếp đến trang đăng nhập
-        request.getRequestDispatcher("/views/LoginForStaff.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/index.jsp").forward(request, response);
     }
 
     @Override

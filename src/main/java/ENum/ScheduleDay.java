@@ -4,10 +4,6 @@
  */
 package ENum;
 
-/**
- *
- * @author LENOVO
- */
 public enum ScheduleDay {
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 }

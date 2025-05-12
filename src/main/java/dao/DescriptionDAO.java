@@ -1,62 +1,129 @@
-package DAO;
+package dao;
 
-import Model.Description;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
+import Model.Description;
+import ENum.ScheduleDay;
 import java.util.List;
+import java.util.Set;
 
 public class DescriptionDAO {
 
-    private EntityManager entityManager;
+    private static final String PERSISTENCE_UNIT_NAME = "MyWebAppPU";
+    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
-    public DescriptionDAO(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    public void save(Description description) {
-        EntityTransaction transaction = entityManager.getTransaction();
+    public boolean saveDescription(Description description) {
+        EntityManager em = factory.createEntityManager();
         try {
-            transaction.begin();
-            entityManager.persist(description);
-            transaction.commit();
+            em.getTransaction().begin();
+            if (description.getDescriptionId() == null) {
+                em.persist(description);
+            } else {
+                em.merge(description);
+            }
+            em.getTransaction().commit();
+            return true;
         } catch (Exception e) {
-            transaction.rollback();
-            throw e;
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
         }
     }
 
-    public Description findById(Long id) {
-        return entityManager.find(Description.class, id);
+    public Description findById(Long descriptionId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            return em.find(Description.class, descriptionId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
     }
 
     public List<Description> findAll() {
-        return entityManager.createQuery("SELECT d FROM Description d", Description.class).getResultList();
-    }
-
-    public void update(Description description) {
-        EntityTransaction transaction = entityManager.getTransaction();
+        EntityManager em = factory.createEntityManager();
         try {
-            transaction.begin();
-            entityManager.merge(description);
-            transaction.commit();
+            TypedQuery<Description> query = em.createQuery("SELECT d FROM Description d", Description.class);
+            return query.getResultList();
         } catch (Exception e) {
-            transaction.rollback();
-            throw e;
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
         }
     }
 
-    public void delete(Long id) {
-        EntityTransaction transaction = entityManager.getTransaction();
+    public boolean deleteDescription(Long descriptionId) {
+        EntityManager em = factory.createEntityManager();
         try {
-            transaction.begin();
-            Description description = entityManager.find(Description.class, id);
+            em.getTransaction().begin();
+            Description description = em.find(Description.class, descriptionId);
             if (description != null) {
-                entityManager.remove(description);
+                em.remove(description);
+                em.getTransaction().commit();
+                return true;
             }
-            transaction.commit();
+            em.getTransaction().commit();
+            return false;
         } catch (Exception e) {
-            transaction.rollback();
-            throw e;
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean updateApplicableDays(Long descriptionId, Set<ScheduleDay> applicableDays) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Description description = em.find(Description.class, descriptionId);
+            if (description != null) {
+                description.getApplicableDays().clear();
+                description.getApplicableDays().addAll(applicableDays);
+                em.merge(description);
+                em.getTransaction().commit();
+                return true;
+            }
+            em.getTransaction().commit();
+            return false;
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+
+    public Description findByCourseId(Long courseId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            TypedQuery<Description> query = em.createQuery(
+                "SELECT d FROM Description d WHERE d.course.courseId = :courseId", Description.class);
+            query.setParameter("courseId", courseId);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
         }
     }
 }

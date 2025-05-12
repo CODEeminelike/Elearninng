@@ -1,6 +1,10 @@
 package dao;
 
-import jakarta.persistence.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import Model.Course;
 import java.util.List;
 
@@ -9,62 +13,21 @@ public class CourseDAO {
     private static final String PERSISTENCE_UNIT_NAME = "MyWebAppPU";
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
-    // Tìm Course theo ID
-    public Course findById(Long id) {
-        EntityManager em = factory.createEntityManager();
-        Course course = null;
-        try {
-            course = em.find(Course.class, id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            em.close();
-        }
-        return course;
-    }
-
-    // Lấy tất cả Course
-    public List<Course> findAll() {
-        EntityManager em = factory.createEntityManager();
-        List<Course> list = null;
-        try {
-            TypedQuery<Course> query = em.createQuery("SELECT c FROM Course c", Course.class);
-            list = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            em.close();
-        }
-        return list;
-    }
-
-    // Tìm Course theo tiêu đề
-    public List<Course> findByTitle(String keyword) {
-        EntityManager em = factory.createEntityManager();
-        List<Course> list = null;
-        try {
-            TypedQuery<Course> query = em.createQuery(
-                "SELECT c FROM Course c WHERE LOWER(c.title) LIKE :keyword", Course.class);
-            query.setParameter("keyword", "%" + keyword.toLowerCase() + "%");
-            list = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            em.close();
-        }
-        return list;
-    }
-
-    // Lưu Course mới
     public boolean saveCourse(Course course) {
         EntityManager em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(course);
+            if (course.getCourseId() == null) {
+                em.persist(course);
+            } else {
+                em.merge(course);
+            }
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
             e.printStackTrace();
             return false;
         } finally {
@@ -72,41 +35,96 @@ public class CourseDAO {
         }
     }
 
-    // Cập nhật Course
-    public boolean updateCourse(Course course) {
+    public Course findById(Long courseId) {
         EntityManager em = factory.createEntityManager();
         try {
-            em.getTransaction().begin();
-            em.merge(course);
-            em.getTransaction().commit();
-            return true;
+            return em.find(Course.class, courseId);
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) em.getTransaction().rollback();
             e.printStackTrace();
-            return false;
+            return null;
         } finally {
             em.close();
         }
     }
 
-    // Xoá Course
-    public boolean deleteCourse(Long id) {
+    public List<Course> findAll() {
+        EntityManager em = factory.createEntityManager();
+        try {
+            TypedQuery<Course> query = em.createQuery("SELECT c FROM Course c", Course.class);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean deleteCourse(Long courseId) {
         EntityManager em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
-            Course course = em.find(Course.class, id);
+            Course course = em.find(Course.class, courseId);
             if (course != null) {
                 em.remove(course);
                 em.getTransaction().commit();
                 return true;
-            } else {
-                em.getTransaction().rollback(); // Không có gì để xoá
-                return false;
             }
+            em.getTransaction().commit();
+            return false;
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
             e.printStackTrace();
             return false;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Course> findByCategoryId(Long categoryId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            TypedQuery<Course> query = em.createQuery(
+                "SELECT c FROM Course c WHERE c.category.categoryId = :categoryId", Course.class);
+            query.setParameter("categoryId", categoryId);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Course> findByTeacherId(Long teacherId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            TypedQuery<Course> query = em.createQuery(
+                "SELECT c FROM Course c WHERE c.teacher.teacherId = :teacherId", Course.class);
+            query.setParameter("teacherId", teacherId);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public Course findByTitle(String title) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            TypedQuery<Course> query = em.createQuery(
+                "SELECT c FROM Course c WHERE c.title = :title", Course.class);
+            query.setParameter("title", title);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         } finally {
             em.close();
         }

@@ -102,6 +102,7 @@ public class Teacher extends Account implements Serializable { // Giữ lại im
         // Teacher teacher = (Teacher) o; // Không cần so sánh thêm trường nào riêng của Teacher vì không có Include ở đây
         return true;
     }
+   
 
     // Phương thức hashCode() thủ công (thay thế @EqualsAndHashCode)
     // Dựa trên callSuper=true và onlyExplicitlyIncluded=true, chỉ sử dụng hashCode của lớp cha (dựa trên ID Account)

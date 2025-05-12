@@ -215,6 +215,17 @@ public class AccountDAO {
             em.close();
         }
     }
-    
+    // Thêm phương thức để lấy Teacher từ Account
+    public Teacher getTeacherByAccountId(Long accountId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            return em.find(Teacher.class, accountId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
     // Có thể thêm các phương thức khác như findById, updateAccount, deleteAccount...
 }

@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("loggedInAccount", account); // Lưu thông tin người dùng vào session
 
             // Chuyển hướng đến trang chào mừng hoặc trang chính
-            response.sendRedirect(request.getContextPath() + "/views/home.jsp"); // Ví dụ: chuyển hướng đến /home
+            response.sendRedirect(request.getContextPath() + "/views/StudentDashboard.jsp"); // Ví dụ: chuyển hướng đến /home
         } else {
             // Đăng nhập thất bại
             request.setAttribute("errorMessage", "Tên đăng nhập hoặc mật khẩu không chính xác.");
