@@ -7,36 +7,60 @@
         <style>
             /* Style cho Header */
             .header {
-                background-color: #4CAF50;
-                padding: 20px;
-                text-align: center;
-                font-size: 20px;
-                color: white;
+                background-color: white;
+                padding: 20px 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 position: fixed;
                 width: 100%;
                 top: 0;
                 left: 0;
                 z-index: 1000;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             }
 
-            .header button {
-                background-color: #f1f1f1;
-                color: #4CAF50;
-                padding: 14px 20px;
-                margin: 0 10px;
+            /* Phần button điều hướng */
+            .nav-buttons {
+                display: flex;
+                gap: 20px;
+            }
+
+            .nav-button {
+                color: #333;
+                text-decoration: none;
+                font-weight: 500;
+                padding: 8px 0;
+                position: relative;
+                transition: color 0.3s ease;
+                background: none;
                 border: none;
                 font-size: 16px;
                 cursor: pointer;
-                transition: background-color 0.3s ease;
             }
 
-            .header button:hover {
-                background-color: #ddd;
+            .nav-button:hover {
+                color: #4CAF50;
+            }
+
+            .nav-button::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: #4CAF50;
+                transition: width 0.3s ease;
+            }
+
+            .nav-button:hover::after {
+                width: 100%;
             }
 
             /* Style cho content phía dưới header */
             .content {
-                margin-top: 80px; /* Đảm bảo phần content không bị che khuất bởi header */
+                margin-top: 80px;
                 padding: 20px;
             }
 
@@ -50,8 +74,10 @@
     <body>
         <!-- Header -->
         <div class="header">
-            <button onclick="loadPage('category')">Category</button>
-            <button onclick="loadPage('course')">Course</button>
+            <div class="nav-buttons">
+                <button class="nav-button" onclick="loadPage('category')">Category</button>
+                <button class="nav-button" onclick="loadPage('course')">Course</button>
+            </div>
         </div>
 
         <!-- Content Area -->
@@ -65,13 +91,13 @@
                 var frame = document.getElementById('contentFrame');
                 switch(page) {
                     case 'category':
-                        frame.src = "<%= request.getContextPath() %>/views/admin/managecategories.jsp"; // Thay bằng đường dẫn tới trang Category
+                        frame.src = "<%= request.getContextPath() %>/views/admin/managecategories.jsp";
                         break;
                     case 'course':
-                        frame.src = "<%= request.getContextPath() %>/views/admin/course.jsp"; // Thay bằng đường dẫn tới trang Course
+                        frame.src = "<%= request.getContextPath() %>/views/admin/course.jsp";
                         break;
                     default:
-                        frame.src = "about:blank"; // Không làm gì nếu không chọn
+                        frame.src = "about:blank";
                 }
             }
         </script>

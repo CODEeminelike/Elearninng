@@ -17,6 +17,11 @@
             padding: 8px;
             box-sizing: border-box;
         }
+        .form-group .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
         .submit-btn {
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -43,8 +48,11 @@
         </div>
         <div class="form-group">
             <label for="thumbnail">Thumbnail:</label>
-            <input type="text" id="thumbnail" name="thumbnail" placeholder="Enter image path (e.g., views/img/image.jpg)">
+            <input type="text" id="thumbnail" name="thumbnail" value="${selectedImage}" placeholder="Enter image path (e.g., views/img/image.jpg)">
             <a href="${pageContext.request.contextPath}/select-image" target="_blank">Choose Image</a>
+            <c:if test="${not empty selectedImage}">
+                <img src="${pageContext.request.contextPath}/${selectedImage}" alt="Preview" width="100"/>
+            </c:if>
         </div>
         <div class="form-group">
             <label for="categoryId">Category:</label>
@@ -58,6 +66,18 @@
         <div class="form-group">
             <label for="descriptionContent">Description:</label>
             <textarea id="descriptionContent" name="descriptionContent" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Applicable Days:</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="applicableDays" value="MONDAY"> Monday</label>
+                <label><input type="checkbox" name="applicableDays" value="TUESDAY"> Tuesday</label>
+                <label><input type="checkbox" name="applicableDays" value="WEDNESDAY"> Wednesday</label>
+                <label><input type="checkbox" name="applicableDays" value="THURSDAY"> Thursday</label>
+                <label><input type="checkbox" name="applicableDays" value="FRIDAY"> Friday</label>
+                <label><input type="checkbox" name="applicableDays" value="SATURDAY"> Saturday</label>
+                <label><input type="checkbox" name="applicableDays" value="SUNDAY"> Sunday</label>
+            </div>
         </div>
         <button type="submit" class="submit-btn">Create Course</button>
     </form>

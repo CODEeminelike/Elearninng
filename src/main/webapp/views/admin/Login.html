@@ -4,140 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập StarAdmin</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f7f6; /* Màu nền xám nhạt giống ảnh */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-}
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #508bfc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
 
-.login-form {
-    background-color: #ffffff;
-    padding: 40px 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px; /* Giới hạn chiều rộng tối đa của form */
-    box-sizing: border-box;
-}
+        .login-form {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            text-align: center;
+        }
 
-.login-form h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #333;
-    margin-top: 0;
-    margin-bottom: 10px;
-    text-align: left;
-}
+        .login-form h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
 
-.login-form .subtitle {
-    font-size: 18px;
-    color: #555;
-    margin-bottom: 8px;
-    text-align: left;
-}
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
 
-.login-form .info-text {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 25px;
-    text-align: left;
-}
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
 
-.form-group {
-    margin-bottom: 20px;
-}
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus {
+            outline: none;
+            border-color: #508bfc;
+        }
 
-.form-group input[type="text"],
-.form-group input[type="password"] {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
+        .btn-signin {
+            background-color: #508bfc;
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
 
-.form-group input[type="text"]::placeholder,
-.form-group input[type="password"]::placeholder {
-    color: #aaa;
-}
+        .btn-signin:hover {
+            background-color: #3a7bd5;
+        }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="password"]:focus {
-    outline: none;
-    border-color: #007bff; /* Màu viền khi focus, có thể đổi theo màu nút */
-}
+        /* Additional styling from code 1 */
+        .form-outline {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
 
-.btn-signin {
-    background-color: #3747aD; /* Màu xanh dương đậm giống nút SIGN IN */
-    color: white;
-    border: none;
-    padding: 12px 15px;
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease;
-}
+        .form-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0.375rem 0.75rem;
+            transition: all 0.2s;
+            color: #6c757d;
+            pointer-events: none;
+            transform-origin: 0 0;
+        }
 
-.btn-signin:hover {
-    background-color: #2c3a8a; /* Màu đậm hơn khi hover */
-}
+        .form-control:focus ~ .form-label,
+        .form-control:not(:placeholder-shown) ~ .form-label {
+            transform: translateY(-1.25rem) scale(0.8);
+            color: #508bfc;
+        }
 
-/* Responsive adjustments */
-@media (max-width: 480px) {
-    .login-form {
-        padding: 30px 20px;
-    }
-
-    .login-form h2 {
-        font-size: 22px;
-    }
-
-    .login-form .subtitle {
-        font-size: 16px;
-    }
-
-    .login-form .info-text {
-        font-size: 13px;
-    }
-}
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .login-form {
+                padding: 30px 20px;
+            }
+        }
     </style>
+</head>
 <body>
     <div class="login-container">
         <div class="login-form">
             <h2>StarAdmin</h2>
-            <p class="subtitle">Hello! let's get started</p>
-            <p class="info-text">Sign in to continue.</p>
-              <form id="loginForm" action="<%= request.getContextPath() %>/stafflogin" method="POST">
-                <div class="form-group">
-                    <input type="text" id="username" name="username" placeholder="Username" required>
+            <form id="loginForm" action="<%= request.getContextPath() %>/stafflogin" method="POST">
+                <div class="form-group form-outline">
+                    <input type="text" id="username" name="username" class="form-control" placeholder=" " required>
+                    <label class="form-label" for="username">Username</label>
                 </div>
-                <div class="form-group">
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                <div class="form-group form-outline">
+                    <input type="password" id="password" name="password" class="form-control" placeholder=" " required>
+                    <label class="form-label" for="password">Password</label>
                 </div>
                 <button type="submit" class="btn-signin">SIGN IN</button>
             </form>
         </div>
     </div>
+
+    <script>
+        // Add floating label functionality
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('input', function() {
+                if(this.value !== '') {
+                    this.nextElementSibling.classList.add('active');
+                } else {
+                    this.nextElementSibling.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

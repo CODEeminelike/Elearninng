@@ -1,10 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controller;
-
-
 
 import dao.CourseDAO;
 import dao.AccountDAO;
@@ -18,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/teacher/manage-courses")
@@ -36,21 +31,53 @@ public class ManageCoursesServlet extends HttpServlet {
         Account account = (Account) session.getAttribute("account");
         AccountDAO accountDAO = new AccountDAO();
 
-//        // Kiểm tra xem account có phải là Teacher không
-//        if (!accountDAO.isTeacher(account.getId())) {
-//            request.setAttribute("error", "You are not authorized to manage courses.");
-//            request.getRequestDispatcher("/views/error.jsp").forward(request, response);
-//            return;
-//        }
+        // Kiểm tra xem account có phải là Teacher không
+        if (!accountDAO.isTeacher(account.getAccountId())) {
+            request.setAttribute("error", "You are not authorized to manage courses.");
+            request.getRequestDispatcher("/views/error.jsp").forward(request, response);
+            return;
+        }
 
-        // Giả định có một phương thức trong Account để lấy Teacher (hoặc lấy từ DB)
-        // Ở đây, tôi giả định bạn có cách lấy Teacher từ Account, ví dụ: một truy vấn trong AccountDAO
-        Long teacherId = account.getAccountId(); // Giả định Account.id tương ứng với Teacher.id
+        // Kiểm tra action
+        String action = request.getParameter("action");
         CourseDAO courseDAO = new CourseDAO();
-        List<Course> courses = courseDAO.findByTeacherId(teacherId);
+        Long teacherId = account.getAccountId(); // Sử dụng accountId làm teacherId
 
-        // Gửi danh sách khóa học đến JSP
-        request.setAttribute("courses", courses);
+        if ("delete".equals(action)) {
+            // Xóa khóa học
+            String courseIdStr = request.getParameter("courseId");
+            try {
+                Long courseId = Long.parseLong(courseIdStr);
+                System.out.println("Deleting course with ID: " + courseId);
+                boolean deleted = courseDAO.deleteCourse(courseId);
+                if (deleted) {
+                    request.setAttribute("message", "Course deleted successfully.");
+                } else {
+                    request.setAttribute("error", "Failed to delete course. Course not found.");
+                }
+            } catch (NumberFormatException e) {
+                request.setAttribute("error", "Invalid course ID.");
+            }
+
+            // Lấy lại danh sách khóa học để hiển thị
+            List<Course> courses = courseDAO.findByTeacherId(teacherId);
+            if (courses == null) {
+                courses = new ArrayList<>();
+            }
+            request.setAttribute("courses", courses);
+            request.setAttribute("showCourses", true);
+        } else if ("show".equals(action)) {
+            // Hiển thị danh sách khóa học
+            System.out.println("Finding courses for accountId: " + teacherId);
+            List<Course> courses = courseDAO.findByTeacherId(teacherId);
+            if (courses == null) {
+                courses = new ArrayList<>();
+            }
+            request.setAttribute("courses", courses);
+            request.setAttribute("showCourses", true);
+        }
+
+        // Chuyển tiếp đến JSP
         request.getRequestDispatcher("/views/teacher/managecourses.jsp").forward(request, response);
     }
 }

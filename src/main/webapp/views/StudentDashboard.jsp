@@ -9,136 +9,130 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        :root {
+            --header-height: 60px;
+            --navi-width: 220px;
+        }
+
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
             display: flex;
             height: 100vh;
+            background-color: #f4f7fa;
         }
 
-       /* Header style */
-/* Header style */
-/* Header style */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 30px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 1000;
-    box-sizing: border-box;
-}
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box;
+            height: var(--header-height);
+        }
 
-/* Logo style */
-.header .logo {
-    font-size: 24px;
-    font-weight: 700;
-    color: #00bcd4;
-    display: flex;
-    align-items: center;
-}
+        .header .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00bcd4;
+            display: flex;
+            align-items: center;
+        }
+        .header .logo i {
+            margin-right: 8px;
+        }
 
-/* Student info */
-.header .student-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;  /* Đảm bảo phần này không thu hẹp */
-    white-space: nowrap;  /* Ngăn không cho text bị ngắt dòng */
-}
-
-.header .student-info i {
-    font-size: 20px;
-}
-
-.header .student-info span {
-    font-size: 16px;
-}
-
-        /* Side navigation (Navi) */
-       /* Side navigation (Navi) */
-/* Side navigation (Navi) */
-.navi {
-    position: fixed;
-    top: 60px; /* Điều chỉnh top này cho đến khi không còn khe hở */
-    left: 0;
-    width: 200px;
-    background-color: #f5f5f5;
-    padding: 20px;
-    height: 100%;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-    margin-top: 0; /* Đảm bảo không có margin */
-}
-        .navi .nav-item {
+        .header .student-info {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 0;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
-        .navi .nav-item:hover {
+        .header .student-info i {
+            font-size: 20px;
+        }
+
+        .header .student-info span {
+            font-size: 16px;
+        }
+
+        .navi {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: var(--navi-width);
+            background-color: #f5f5f5;
+            padding: 20px 0;
+            height: calc(100vh - var(--header-height));
+            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .navi .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+            font-weight: 500;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .navi .nav-item a:hover {
             background-color: #00bcd4;
             color: white;
         }
 
-        .navi .nav-item i {
-            font-size: 20px;
-        }
-
-        .navi .nav-item .text {
-            font-size: 16px;
-        }
-
-        .navi .logout {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            padding: 10px 0;
+        .navi .nav-item a i {
+            font-size: 18px;
+            width: 20px;
             text-align: center;
-            cursor: pointer;
-            background-color: #f44336;
-            color: white;
-            font-weight: bold;
         }
 
-       /* Main content area */
-.main-content {
-    margin-left: 220px; /* Điều chỉnh margin để tránh bị đè lên Navigation */
-    padding-top: 70px; /* Căn chỉnh với Header */
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #f4f7fa;
-}
+        .navi .logout a:hover {
+            background-color: #f44336 !important;
+            color: white !important;
+        }
 
-        .frame {
+        .main-content-wrapper {
+            margin-left: var(--navi-width);
+            padding-top: var(--header-height);
+            flex-grow: 1;
+            height: calc(100vh - var(--header-height));
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        #contentFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
         }
-        .nav-item a {
-    text-decoration: none;  /* Bỏ gạch dưới */
-    color: inherit;         /* Giữ màu của chữ như bình thường */
-    display: flex;          /* Đảm bảo icon và text vẫn nằm trên cùng một dòng */
-    align-items: center;    /* Căn giữa các phần tử */
-    width: 100%;            /* Đảm bảo thẻ <a> chiếm toàn bộ diện tích của div */
-}
-        
-        
     </style>
 </head>
 <body>
+    <%-- 
+    if (session.getAttribute("studentAccount") == null) {
+        response.sendRedirect(request.getContextPath() + "/views/LoginForStudent.jsp");
+        return;
+    }
+    --%>
 
-    <!-- Header -->
     <div class="header">
         <div class="logo">
             <i class="fa fa-book"></i> eLEARNING
@@ -149,40 +143,85 @@
         </div>
     </div>
 
-    <!-- Side Navigation -->
     <div class="navi">
         <div class="nav-item">
-            <a href="/el1/views/index.jsp" class="nav-link">
-        <i class="fa fa-home"></i>
-        <span class="text">Trang chủ</span>
-    </a>
-        </div>
-
-        <div class="nav-item">
-            <i class="fa fa-book"></i>
-            <span class="text">Khóa học của tôi</span>
+            <%-- THAY ĐỔI Ở ĐÂY: href trỏ đến trang chủ thực sự, bỏ onclick --%>
+            <a href="<%= request.getContextPath() %>/views/index.jsp"> 
+                <i class="fa fa-home"></i>
+                <span class="text">Trang chủ</span>
+            </a>
         </div>
         <div class="nav-item">
-            <i class="fa fa-chart-bar"></i>
-            <span class="text">Thống kê</span>
+            <a href="javascript:void(0)" onclick="loadStudentPage('myCourses')">
+                <i class="fa fa-book"></i>
+                <span class="text">Khóa học của tôi</span>
+            </a>
         </div>
         <div class="nav-item">
-            <i class="fa fa-bell"></i>
-            <span class="text">Thông báo</span>
+            <a href="javascript:void(0)" onclick="loadStudentPage('statistics')">
+                <i class="fa fa-chart-bar"></i>
+                <span class="text">Thống kê</span>
+            </a>
         </div>
-        <div class="logout">
-            <span>Đăng xuất</span>
+        <div class="nav-item">
+            <a href="javascript:void(0)" onclick="loadStudentPage('notifications')">
+                <i class="fa fa-bell"></i>
+                <span class="text">Thông báo</span>
+            </a>
+        </div>
+        <div class="nav-item logout">
+            <a href="<%= request.getContextPath() %>/logout">
+                <i class="fa fa-sign-out-alt"></i>
+                <span class="text">Đăng xuất</span>
+            </a>
         </div>
     </div>
 
-    <!-- Main Content Area -->
-    <div class="main-content">
-        <div class="frame">
-            <!-- Content for the selected option will be displayed here -->
-            <h2>Welcome to your Dashboard, Student!</h2>
-            <p>Choose a section from the navigation menu.</p>
-        </div>
+    <div class="main-content-wrapper">
+        <iframe id="contentFrame" name="contentFrame" src="about:blank"></iframe>
     </div>
 
+    <c:if test="${not empty error}">
+        <p style="color: red; position: fixed; bottom: 10px; left: calc(var(--navi-width) + 20px); background-color: white; padding: 5px 10px; border-radius: 4px; box-shadow: 0 0 5px rgba(0,0,0,0.2);">${error}</p>
+    </c:if>
+
+    <script>
+        function loadStudentPage(pageKey) {
+            const frame = document.getElementById('contentFrame');
+            const contextPath = "<%= request.getContextPath() %>";
+            let targetUrl = "about:blank"; 
+
+            switch(pageKey) {
+                case 'welcomeDashboard': 
+    // !!! ĐẢM BẢO ĐƯỜNG DẪN NÀY CHÍNH XÁC ĐẾN TỆP HTML BẠN VỪA TẠO !!!
+    targetUrl = contextPath + "/views/welcome_dashboard.html"; 
+    break;
+                case 'myCourses':
+                    // !!! THAY THẾ BẰNG URL TRANG KHÓA HỌC CỦA TÔI CỦA SINH VIÊN !!!
+                    targetUrl = contextPath + "/views/student/myCourses.jsp"; // Ví dụ
+                    break;
+                case 'statistics':
+                    // !!! THAY THẾ BẰNG URL TRANG THỐNG KÊ SINH VIÊN CỦA BẠN !!!
+                    targetUrl = contextPath + "/views/student/studentStatistics.jsp"; // Ví dụ
+                    break;
+                case 'notifications':
+                    // !!! THAY THẾ BẰNG URL TRANG THÔNG BÁO SINH VIÊN CỦA BẠN !!!
+                    targetUrl = contextPath + "/views/student/studentNotifications.jsp"; // Ví dụ
+                    break;
+                default:
+                    // Trang mặc định nếu pageKey không khớp và không phải là trang đầu tiên
+                    // Có thể là một trang chào mừng riêng cho phần iframe
+                    targetUrl = contextPath + "/views/student/welcomeStudentDashboard.jsp"; // Ví dụ
+                    break;
+            }
+            frame.src = targetUrl;
+        }
+
+        window.onload = function() {
+            // Tải "Khóa học của tôi" làm trang mặc định trong iframe khi dashboard được mở
+            // Bạn có thể thay 'myCourses' bằng key của trang mặc định khác nếu muốn
+            loadStudentPage('welcomeDashboard'); 
+        };
+    </script>
 </body>
 </html>

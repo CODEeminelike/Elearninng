@@ -1,8 +1,4 @@
-package Controller;
-
-
-
-
+package servlet;
 
 import dao.CategoryDAO;
 import dao.CourseDAO;
@@ -12,6 +8,7 @@ import Model.Category;
 import Model.Course;
 import Model.Description;
 import Model.Teacher;
+import ENum.ScheduleDay;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,7 +17,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @WebServlet("/teacher/create-course")
 public class CreateCourseServlet extends HttpServlet {
@@ -76,6 +75,7 @@ public class CreateCourseServlet extends HttpServlet {
         String thumbnail = request.getParameter("thumbnail");
         String categoryIdStr = request.getParameter("categoryId");
         String descriptionContent = request.getParameter("descriptionContent");
+        String[] applicableDaysArray = request.getParameterValues("applicableDays");
 
         // Validate dữ liệu
         if (title == null || title.trim().isEmpty() || priceStr == null || categoryIdStr == null || descriptionContent == null) {
@@ -111,7 +111,7 @@ public class CreateCourseServlet extends HttpServlet {
         }
         course.setCategory(category);
 
-        // Lấy Teacher từ Account (thay vì tạo mới)
+        // Lấy Teacher từ Account
         Teacher teacher = accountDAO.getTeacherByAccountId(account.getAccountId());
         if (teacher == null) {
             request.setAttribute("error", "Teacher not found for this account.");
@@ -124,6 +124,23 @@ public class CreateCourseServlet extends HttpServlet {
         // Tạo và gán Description
         Description description = new Description();
         description.setContent(descriptionContent);
+
+        // Xử lý applicableDays
+        Set<ScheduleDay> applicableDays = new HashSet<>();
+        if (applicableDaysArray != null) {
+            for (String day : applicableDaysArray) {
+                try {
+                    applicableDays.add(ScheduleDay.valueOf(day));
+                } catch (IllegalArgumentException e) {
+                    request.setAttribute("error", "Invalid schedule day: " + day);
+                    request.setAttribute("categories", categoryDAO.findAll());
+                    request.getRequestDispatcher("/views/teacher/createcourse.jsp").forward(request, response);
+                    return;
+                }
+            }
+        }
+        description.getApplicableDays().addAll(applicableDays);
+
         course.setDescription(description);
 
         // Lưu Course vào DB

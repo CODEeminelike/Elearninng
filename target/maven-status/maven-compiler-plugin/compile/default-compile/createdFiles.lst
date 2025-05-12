@@ -12,6 +12,7 @@ Util\PasswordUtil.class
 Controller\CreateTeacherServlet.class
 Util\EmailUtil$1.class
 Util\EmailUtil.class
+dao\LessonDAO.class
 Model\Question.class
 test\SetupAdmin.class
 Model\Teacher.class
@@ -24,6 +25,7 @@ Controller\LogoutServlet.class
 Model\Review.class
 Controller\ResetPasswordServlet.class
 Controller\UsersJpaController.class
+servlet\CreateCourseServlet.class
 dao\ChapterDAO.class
 Model\Student.class
 dao\AccountDAO.class
@@ -40,7 +42,7 @@ ENum\PaymentMethod.class
 Controller\ManageCoursesServlet.class
 dao\TeacherDAO.class
 com\mycompany\el1\JakartaRestConfiguration.class
-Controller\CreateCourseServlet.class
+dao\FileMediaDAO.class
 Util\AuthFilter.class
 dao\CourseDAO.class
 ENum\ScheduleDay.class

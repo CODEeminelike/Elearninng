@@ -2,6 +2,7 @@ package test;
 
 import Model.Account;
 import Model.Admin;
+import Model.Course;
 import Model.Teacher;
 import dao.*;
 import dao.AdminDAO;
@@ -18,28 +19,29 @@ import java.util.Map;
 
 @WebServlet(name = "TestServlet", urlPatterns = {"/test"})
 public class test extends HttpServlet {
-    private TeacherDAO teacherDAO;
+    
     private AccountDAO accountDAO;
 
     @Override
     public void init() throws ServletException {
-       teacherDAO = new TeacherDAO();
-        accountDAO = new AccountDAO();
+              accountDAO = new AccountDAO();
     }
 
     
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            // Lấy danh sách tất cả Teacher
-            List<Teacher> teachers = teacherDAO.getAllTeachers();
-            request.setAttribute("teachers", teachers);
-        } catch (Exception e) {
-            request.setAttribute("errorMessage", "Error loading teachers: " + e.getMessage());
-            request.getRequestDispatcher("/ERROR.jsp").forward(request, response);
-        }
-        request.getRequestDispatcher("/Done.jsp").forward(request, response);
+        AccountDAO accountDAO = new AccountDAO();
+               
+            // Lấy danh sách khóa học
+            Long teacherId = 36L; // Giả định Account.id tương ứng với Teacher.id
+            CourseDAO courseDAO = new CourseDAO();
+            List<Course> courses = courseDAO.findByTeacherId(teacherId);
+
+            // Gửi danh sách khóa học và cờ showCourses đến JSP
+            request.setAttribute("courses", courses);
+            request.getRequestDispatcher("/Done.jsp").forward(request, response);
+    
     }
     
 }
