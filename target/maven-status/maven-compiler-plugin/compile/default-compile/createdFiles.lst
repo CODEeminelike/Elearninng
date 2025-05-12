@@ -1,5 +1,6 @@
 Controller\LoginServlet.class
 Model\PasswordResetToken.class
+dao\OrderDAO.class
 Controller\RegisterServlet.class
 ENum\PaymentStatus.class
 Model\NotificationRequest.class
@@ -23,6 +24,8 @@ Controller\ForgotPasswordServlet.class
 Util\ValidationUtil.class
 Controller\LogoutServlet.class
 Model\Review.class
+Controller\AutoManageCoursesServlet.class
+Controller\JoinCourseServlet.class
 Controller\ResetPasswordServlet.class
 Controller\UsersJpaController.class
 servlet\CreateCourseServlet.class

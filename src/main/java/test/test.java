@@ -20,11 +20,11 @@ import java.util.Map;
 @WebServlet(name = "TestServlet", urlPatterns = {"/test"})
 public class test extends HttpServlet {
     
-    private AccountDAO accountDAO;
+    private CourseDAO courseDAO;
 
     @Override
     public void init() throws ServletException {
-              accountDAO = new AccountDAO();
+              courseDAO = new CourseDAO();
     }
 
     
@@ -33,14 +33,14 @@ public class test extends HttpServlet {
             throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
                
-            // Lấy danh sách khóa học
-            Long teacherId = 36L; // Giả định Account.id tương ứng với Teacher.id
-            CourseDAO courseDAO = new CourseDAO();
-            List<Course> courses = courseDAO.findByTeacherId(teacherId);
-
-            // Gửi danh sách khóa học và cờ showCourses đến JSP
-            request.setAttribute("courses", courses);
-            request.getRequestDispatcher("/Done.jsp").forward(request, response);
+           if ( courseDAO.deleteCourse(3L)) {
+               
+                // Gửi danh sách khóa học và cờ showCourses đến JSP
+                     request.getRequestDispatcher("/Done.jsp").forward(request, response);
+           }
+           else
+                request.getRequestDispatcher("/ERROR.jsp").forward(request, response);
+           
     
     }
     

@@ -17,6 +17,21 @@ import java.util.List;
 
 @WebServlet("/teacher/manage-courses")
 public class ManageCoursesServlet extends HttpServlet {
+     @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+           CourseDAO courseDAO = new CourseDAO();
+
+           
+            List<Course> courses = courseDAO.findAll();
+            if (courses == null) {
+                courses = new ArrayList<>();
+            }
+            request.setAttribute("courses", courses);
+            request.setAttribute("showCourses", true);
+        request.getRequestDispatcher("/views/admin/showcourses.jsp").forward(request, response);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,7 +63,7 @@ public class ManageCoursesServlet extends HttpServlet {
             String courseIdStr = request.getParameter("courseId");
             try {
                 Long courseId = Long.parseLong(courseIdStr);
-                System.out.println("Deleting course with ID: " + courseId);
+               
                 boolean deleted = courseDAO.deleteCourse(courseId);
                 if (deleted) {
                     request.setAttribute("message", "Course deleted successfully.");

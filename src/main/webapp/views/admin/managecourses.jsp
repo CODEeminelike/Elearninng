@@ -94,7 +94,7 @@
                         frame.src = "<%= request.getContextPath() %>/views/admin/managecategories.jsp";
                         break;
                     case 'course':
-                        frame.src = "<%= request.getContextPath() %>/views/admin/course.jsp";
+                        frame.src = "<%= request.getContextPath() %>/views/admin/showcourses.jsp";
                         break;
                     default:
                         frame.src = "about:blank";

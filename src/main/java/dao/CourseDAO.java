@@ -14,11 +14,7 @@ public class CourseDAO {
     private static final String PERSISTENCE_UNIT_NAME = "MyWebAppPU";
     private static final EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
-    /**
-     * Lưu hoặc cập nhật khóa học vào cơ sở dữ liệu.
-     * @param course Khóa học cần lưu.
-     * @return true nếu lưu thành công, false nếu thất bại.
-     */
+   
     public boolean saveCourse(Course course) {
         EntityManager em = factory.createEntityManager();
         try {
@@ -44,11 +40,7 @@ public class CourseDAO {
         }
     }
 
-    /**
-     * Tìm khóa học theo ID.
-     * @param courseId ID của khóa học.
-     * @return Course nếu tìm thấy, null nếu không tồn tại.
-     */
+   
     public Course findById(Long courseId) {
         EntityManager em = factory.createEntityManager();
         try {
@@ -69,10 +61,7 @@ public class CourseDAO {
         }
     }
 
-    /**
-     * Lấy tất cả khóa học.
-     * @return Danh sách khóa học, rỗng nếu không có hoặc gặp lỗi.
-     */
+  
     public List<Course> findAll() {
         EntityManager em = factory.createEntityManager();
         try {
@@ -90,11 +79,7 @@ public class CourseDAO {
         }
     }
 
-    /**
-     * Xóa khóa học theo ID.
-     * @param courseId ID của khóa học cần xóa.
-     * @return true nếu xóa thành công, false nếu không tìm thấy hoặc gặp lỗi.
-     */
+    
     public boolean deleteCourse(Long courseId) {
         EntityManager em = factory.createEntityManager();
         try {
@@ -122,11 +107,7 @@ public class CourseDAO {
         }
     }
 
-    /**
-     * Tìm khóa học theo ID danh mục.
-     * @param categoryId ID của danh mục.
-     * @return Danh sách khóa học, rỗng nếu không có hoặc gặp lỗi.
-     */
+  
     public List<Course> findByCategoryId(Long categoryId) {
         EntityManager em = factory.createEntityManager();
         try {
@@ -146,11 +127,7 @@ public class CourseDAO {
         }
     }
 
-    /**
-     * Tìm khóa học theo ID giáo viên (accountId của Teacher).
-     * @param teacherId ID của giáo viên (tương ứng với accountId).
-     * @return Danh sách khóa học, rỗng nếu không có hoặc gặp lỗi.
-     */
+   
     public List<Course> findByTeacherId(Long teacherId) {
         EntityManager em = factory.createEntityManager();
         try {
@@ -170,11 +147,7 @@ public class CourseDAO {
         }
     }
 
-    /**
-     * Tìm khóa học theo tiêu đề.
-     * @param title Tiêu đề của khóa học.
-     * @return Course nếu tìm thấy, null nếu không tồn tại hoặc gặp lỗi.
-     */
+   
     public Course findByTitle(String title) {
         EntityManager em = factory.createEntityManager();
         try {

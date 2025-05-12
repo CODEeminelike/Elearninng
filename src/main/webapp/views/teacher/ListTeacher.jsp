@@ -91,30 +91,34 @@
         .status-button:hover {
             background-color: #45a049;
         }
-           /* Style cho nút nhẹ */
-            .btn-light {
-                background-color: #f0f0f0;
-                color: #333;
-                border: 1px solid #ccc;
-                padding: 10px 20px;
-                font-size: 16px;
-                border-radius: 4px;
-                cursor: pointer;
-                transition: background-color 0.3s ease, border-color 0.3s ease;
-                text-align: center;
-            }
-
-            /* Hover effect */
-            .btn-light:hover {
-                background-color: #e0e0e0;
-                border-color: #bbb;
-            }
-
-            /* Focus effect */
-            .btn-light:focus {
-                outline: none;
-                border-color: #888;
-            }
+        .filter-form {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .filter-form input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 200px;
+        }
+        .filter-form select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .filter-form button {
+            padding: 8px 16px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .filter-form button:hover {
+            background-color: #1976D2;
+        }
     </style>
 </head>
 <body>
@@ -127,12 +131,16 @@
     <c:if test="${not empty errorMessage}">
         <p class="error">${errorMessage}</p>
     </c:if>
- <!-- Nút gửi GET tới /teacher-management -->
-        <div style="text-align: center; margin-top: 50px;">
-            <form action="<%= request.getContextPath() %>/teacher-management" method="get">
-                <button type="submit" class="btn-light">Danh sách giáo viên</button>
-            </form>
-        </div>
+
+    <!-- Form lọc -->
+  <div class="filter-form">
+    <form action="${pageContext.request.contextPath}/teacher-management" method="get">
+        <input type="text" name="searchName" value="${searchName}" placeholder="Search by name"/>
+        <button type="submit" name="action" value="all">Tìm kiếm</button>
+     </form>
+</div>
+
+
     <!-- Hiển thị danh sách Teacher -->
     <c:if test="${not empty teachers}">
         <div class="table-container">
@@ -171,6 +179,8 @@
                                 <form action="${pageContext.request.contextPath}/teacher-management" method="post" style="display:inline;">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="accountId" value="${teacher.accountId}">
+                                    <input type="hidden" name="searchName" value="${searchName}">
+                                    <input type="hidden" name="filterAction" value="${action}">
                                     <button type="submit" class="action-button delete-button" 
                                             onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
                                 </form>
@@ -179,6 +189,8 @@
                                     <input type="hidden" name="action" value="updateStatus">
                                     <input type="hidden" name="accountId" value="${teacher.accountId}">
                                     <input type="hidden" name="isActive" value="${!teacher.active}">
+                                    <input type="hidden" name="searchName" value="${searchName}">
+                                    <input type="hidden" name="filterAction" value="${action}">
                                     <button type="submit" class="action-button status-button">${teacher.active ? 'Deactivate' : 'Activate'}</button>
                                 </form>
                             </td>

@@ -6,6 +6,7 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import Model.Account;
 import Model.Teacher;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeacherDAO {
@@ -76,7 +77,76 @@ public class TeacherDAO {
             em.close();
         }
     }
+    
+    
+     public List<Teacher> getActiveTeachers() {
+        EntityManager em = factory.createEntityManager();
+        try {
+            System.out.println("Finding active teachers");
+            TypedQuery<Teacher> query = em.createQuery(
+                "SELECT t FROM Teacher t WHERE t.isActive = :active", Teacher.class);
+            query.setParameter("active", true);
+            List<Teacher> teachers = query.getResultList();
+            System.out.println("Found " + teachers.size() + " active teachers");
+            if (teachers.isEmpty()) {
+                System.out.println("No active teachers found. Check if 'is_active' = true exists in 'accounts' table.");
+            } else {
+                for (Teacher t : teachers) {
+                    System.out.println("Active teacher: ID=" + t.getAccountId() + ", Name=" + t.getName() + ", isActive=" + t.isActive());
+                }
+            }
+            return teachers;
+        } catch (Exception e) {
+            System.err.println("Error in getActiveTeachers: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        } finally {
+            em.close();
+        }
+    }
 
+    public List<Teacher> getInactiveTeachers() {
+        EntityManager em = factory.createEntityManager();
+        try {
+            System.out.println("Finding inactive teachers");
+            TypedQuery<Teacher> query = em.createQuery(
+                "SELECT t FROM Teacher t WHERE t.isActive = :active", Teacher.class);
+            query.setParameter("active", false);
+            List<Teacher> teachers = query.getResultList();
+            System.out.println("Found " + teachers.size() + " inactive teachers");
+            return teachers;
+        } catch (Exception e) {
+            System.err.println("Error in getInactiveTeachers: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        } finally {
+            em.close();
+        }
+    }
+    
+public List<Teacher> getAllTeachers(String searchName) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            
+            String jpql = "SELECT t FROM Teacher t";
+            if (searchName != null && !searchName.trim().isEmpty()) {
+                jpql += " WHERE LOWER(t.name) LIKE :searchName";
+            }
+            TypedQuery<Teacher> query = em.createQuery(jpql, Teacher.class);
+            if (searchName != null && !searchName.trim().isEmpty()) {
+                query.setParameter("searchName", "%" + searchName.trim().toLowerCase() + "%");
+            }
+            List<Teacher> teachers = query.getResultList();
+            System.out.println("Found " + teachers.size() + " teachers");
+            return teachers;
+        } catch (Exception e) {
+            System.err.println("Error in getAllTeachers: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        } finally {
+            em.close();
+        }
+    }
     // Phương thức lấy danh sách tất cả Teacher
     public List<Teacher> getAllTeachers() throws Exception {
         EntityManager em = factory.createEntityManager();
@@ -117,7 +187,57 @@ public class TeacherDAO {
             em.close();
         }
     }
-
+    
+     // Phương thức mới: tìm teacher theo name và active status
+    public List<Teacher> findTeachersByNameAndStatus(String searchName, Boolean active) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            System.out.println("Finding teachers with name: " + searchName + ", active: " + active);
+            StringBuilder jpql = new StringBuilder("SELECT t FROM Teacher t WHERE 1=1");
+            if (searchName != null && !searchName.trim().isEmpty()) {
+                jpql.append(" AND LOWER(t.name) LIKE :searchName");
+            }
+            if (active != null) {
+                jpql.append(" AND t.active = :active");
+            }
+            TypedQuery<Teacher> query = em.createQuery(jpql.toString(), Teacher.class);
+            if (searchName != null && !searchName.trim().isEmpty()) {
+                query.setParameter("searchName", "%" + searchName.trim().toLowerCase() + "%");
+            }
+            if (active != null) {
+                query.setParameter("active", active);
+            }
+            List<Teacher> teachers = query.getResultList();
+            System.out.println("Found " + teachers.size() + " teachers");
+            return teachers;
+        } catch (Exception e) {
+            System.err.println("Error in findTeachersByNameAndStatus: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        } finally {
+            em.close();
+        }
+    }
+    // Các phương thức khác (findById, removeTeacher, updateTeacherStatus) giữ nguyên
+    public Teacher findById(Long accountId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            System.out.println("Finding teacher by accountId: " + accountId);
+            Teacher teacher = em.find(Teacher.class, accountId);
+            if (teacher != null) {
+                System.out.println("Found teacher: " + teacher.getName());
+            } else {
+                System.out.println("No teacher found for accountId: " + accountId);
+            }
+            return teacher;
+        } catch (Exception e) {
+            System.err.println("Error in findById: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
     // Phương thức cập nhật trạng thái isActive của Teacher
     public boolean updateTeacherStatus(Long accountId, boolean isActive) throws Exception {
         EntityManager em = factory.createEntityManager();

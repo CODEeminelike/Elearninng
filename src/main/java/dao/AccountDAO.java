@@ -7,6 +7,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import Model.Account; // Import lớp Account của bạn
 import Model.Admin;
+import Model.Student;
 import Model.Teacher;
 import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
@@ -220,6 +221,18 @@ public class AccountDAO {
         EntityManager em = factory.createEntityManager();
         try {
             return em.find(Teacher.class, accountId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+    
+     public Student getStudentByAccountId(Long accountId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            return em.find(Student.class, accountId);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

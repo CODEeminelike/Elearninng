@@ -22,20 +22,57 @@ public class TeacherManagementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            // Lấy danh sách tất cả Teacher
-            List<Teacher> teachers = teacherDAO.getAllTeachers();
-            if (teachers == null) {
-                teachers = List.of(); // Đảm bảo teachers không null
+        String action = request.getParameter("action");
+        String searchName = request.getParameter("searchName");
+
+        if ("view".equals(action)) {
+            // Xem chi tiết Teacher
+            String accountIdStr = request.getParameter("accountId");
+            try {
+                Long accountId = Long.parseLong(accountIdStr);
+                Teacher teacher = teacherDAO.findById(accountId);
+                if (teacher != null) {
+                    System.out.println("Found teacher with accountId: " + accountId);
+                    request.setAttribute("teacher", teacher);
+                    request.getRequestDispatcher("/views/teacher/ViewTeacher.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("errorMessage", "Teacher with accountId " + accountId + " not found.");
+                    request.getRequestDispatcher("/views/teacher/TeacherManagement.jsp").forward(request, response);
+                }
+            } catch (NumberFormatException e) {
+                request.setAttribute("errorMessage", "Invalid account ID.");
+                request.getRequestDispatcher("/views/teacher/TeacherManagement.jsp").forward(request, response);
+            } catch (Exception e) {
+                request.setAttribute("errorMessage", "Error loading teacher: " + e.getMessage());
+                e.printStackTrace();
+                request.getRequestDispatcher("/views/teacher/TeacherManagement.jsp").forward(request, response);
             }
-            request.setAttribute("teachers", teachers);
-            // Chuyển đến ListTeacher.jsp để hiển thị danh sách
-            request.getRequestDispatcher("/views/teacher/ListTeacher.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("errorMessage", "Error loading teachers: " + e.getMessage());
-            e.printStackTrace(); // Log lỗi để debug
-            // Nếu có lỗi, vẫn hiển thị trang TeacherManagement.jsp
-            request.getRequestDispatcher("/views/teacher/TeacherManagement.jsp").forward(request, response);
+        } else {
+            // Hiển thị danh sách Teacher với bộ lọc
+            try {
+                List<Teacher> teachers;
+                // Mặc định là all nếu action không được gửi
+                String filterAction = action != null ? action : "all";
+                if ("active".equals(filterAction)) {
+                    teachers = teacherDAO.getActiveTeachers();
+                } else if ("inactive".equals(filterAction)) {
+                    teachers = teacherDAO.getInactiveTeachers();
+                } else {
+                    teachers = teacherDAO.getAllTeachers(searchName);
+                }
+                if (teachers == null) {
+                    teachers = List.of(); // Đảm bảo teachers không null
+                }
+                System.out.println("Found " + teachers.size() + " teachers with searchName: " + searchName + ", action: " + filterAction);
+                request.setAttribute("teachers", teachers);
+                request.setAttribute("searchName", searchName);
+                request.setAttribute("action", filterAction);
+                request.getRequestDispatcher("/views/teacher/ListTeacher.jsp").forward(request, response);
+            } catch (Exception e) {
+                request.setAttribute("errorMessage", "Error loading teachers: " + e.getMessage());
+                e.printStackTrace();
+                request.getRequestDispatcher("/views/teacher/TeacherManagement.jsp").forward(request, response);
+            }
         }
     }
 
@@ -43,6 +80,8 @@ public class TeacherManagementServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+        String searchName = request.getParameter("searchName");
+        String filterAction = request.getParameter("filterAction");
 
         if ("delete".equals(action)) {
             // Xóa Teacher
@@ -76,18 +115,28 @@ public class TeacherManagementServlet extends HttpServlet {
             }
         }
 
-        // Tải lại danh sách Teacher sau khi thực hiện hành động
+        // Tải lại danh sách Teacher với bộ lọc
         try {
-            List<Teacher> teachers = teacherDAO.getAllTeachers();
+            List<Teacher> teachers;
+            // Mặc định là all nếu filterAction không được gửi
+            filterAction = filterAction != null ? filterAction : "all";
+            if ("active".equals(filterAction)) {
+                teachers = teacherDAO.getActiveTeachers();
+            } else if ("inactive".equals(filterAction)) {
+                teachers = teacherDAO.getInactiveTeachers();
+            } else {
+                teachers = teacherDAO.getAllTeachers(searchName);
+            }
             if (teachers == null) {
                 teachers = List.of(); // Đảm bảo teachers không null
             }
             request.setAttribute("teachers", teachers);
+            request.setAttribute("searchName", searchName);
+            request.setAttribute("action", filterAction);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Error loading teachers: " + e.getMessage());
-            e.printStackTrace(); // Log lỗi để debug
+            e.printStackTrace();
         }
-        // Chuyển đến ListTeacher.jsp sau khi thực hiện hành động
         request.getRequestDispatcher("/views/teacher/ListTeacher.jsp").forward(request, response);
     }
 }

@@ -129,7 +129,9 @@
                 </div>
 
                 <!-- Read More Button -->
-                <a href="#" class="read-more-btn">Đọc Thêm</a>
+                <a href="<%= request.getContextPath() %>/teacher/auto-manage-courses" class="read-more-btn">Đọc Thêm</a>
+                
+               
             </div>
         </div>
 

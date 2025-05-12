@@ -14,6 +14,9 @@
     <!-- Main Content -->
     <div class="main-content">
         <jsp:include page="aboutus.jsp" />
+        
+        <jsp:include page="courses.jsp" />
+        
     </div>
 
     <!-- Include Footer -->
