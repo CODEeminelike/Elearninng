@@ -1,136 +1,107 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Teacher Management</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .error {
-            color: red;
-        }
-        .success {
-            color: green;
-        }
-        .show-button {
-            margin-top: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            overflow-x: auto; /* Thêm cuộn ngang nếu bảng quá rộng */
-            display: block; /* Đảm bảo bảng hiển thị đúng */
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-            white-space: nowrap; /* Ngăn nội dung xuống dòng */
-            max-width: 200px; /* Giới hạn chiều rộng tối đa */
-            overflow: hidden; /* Ẩn nội dung vượt quá */
-            text-overflow: ellipsis; /* Thêm dấu ... nếu nội dung bị cắt */
-        }
-        th {
-            background-color: #f2f2f2;
-            position: sticky;
-            top: 0;
-        }
-        .actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: nowrap; /* Ngăn hành động xuống dòng */
-        }
-        /* Đảm bảo nội dung dài (như bio) có thể cuộn */
-        td:nth-child(8), td:nth-child(9) { /* Áp dụng cho cột Bio và Qualifications */
-            max-width: 300px;
-            overflow-x: auto;
-            white-space: normal; /* Cho phép xuống dòng nếu cần */
-        }
-        /* Container bao quanh bảng để kiểm soát cuộn */
-        .table-container {
-            max-height: 400px; /* Giới hạn chiều cao */
-            overflow-y: auto; /* Thêm cuộn dọc nếu bảng quá dài */
-        }
-    </style>
-</head>
-<body>
-    <h2>Teacher Management</h2>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Quản lý Giáo viên</title>
+        <style>
+            /* Style cho Header */
+            .header {
+                background-color: white;
+                padding: 20px 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
 
-    <!-- Hiển thị thông báo thành công hoặc lỗi -->
-    <c:if test="${not empty message}">
-        <p class="success">${message}</p>
-    </c:if>
-    <c:if test="${not empty errorMessage}">
-        <p class="error">${errorMessage}</p>
-    </c:if>
+            /* Phần button điều hướng */
+            .nav-buttons {
+                display: flex;
+                gap: 20px;
+            }
 
-    <!-- Nút để hiển thị danh sách Teacher -->
-    <div class="show-button">
-        <form action="${pageContext.request.contextPath}/teacher-management" method="get">
-            <button type="submit">Show Teachers</button>
-        </form>
-    </div>
+            .nav-button {
+                color: #333;
+                text-decoration: none;
+                font-weight: 500;
+                padding: 8px 0;
+                position: relative;
+                transition: color 0.3s ease;
+                background: none;
+                border: none;
+                font-size: 16px;
+                cursor: pointer;
+            }
 
-    <!-- Hiển thị danh sách Teacher chỉ khi có dữ liệu -->
-    <c:if test="${not empty teachers}">
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Account ID</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Avatar</th>
-                        <th>Active</th>
-                        <th>Name</th>
-                        <th>Bio</th>
-                        <th>Qualifications</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="teacher" items="${teachers}">
-                        <tr>
-                            <td>${teacher.accountId}</td>
-                            <td>${teacher.username}</td>
-                            <td>${teacher.email}</td>
-                            <td>${teacher.phone}</td>
-                            <td>${teacher.avatar}</td>
-                            <td>${teacher.active ? 'Yes' : 'No'}</td>
-                            <td>${teacher.name}</td>
-                            <td>${teacher.bio}</td>
-                            <td>${teacher.qualifications}</td>
-                            <td class="actions">
-                                <!-- Nút xóa -->
-                                <form action="${pageContext.request.contextPath}/teacher-management" method="post" style="display:inline;">
-                                    <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="accountId" value="${teacher.accountId}">
-                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
-                                </form>
-                                <!-- Nút kích hoạt/khóa -->
-                                <form action="${pageContext.request.contextPath}/teacher-management" method="post" style="display:inline;">
-                                    <input type="hidden" name="action" value="updateStatus">
-                                    <input type="hidden" name="accountId" value="${teacher.accountId}">
-                                    <input type="hidden" name="isActive" value="${!teacher.active}">
-                                    <button type="submit">${teacher.active ? 'Deactivate' : 'Activate'}</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+            .nav-button:hover {
+                color: #4CAF50;
+            }
+
+            .nav-button::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: #4CAF50;
+                transition: width 0.3s ease;
+            }
+
+            .nav-button:hover::after {
+                width: 100%;
+            }
+
+            /* Style cho content phía dưới header */
+            .content {
+                margin-top: 80px;
+                padding: 20px;
+            }
+
+            iframe {
+                width: 100%;
+                height: 600px;
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <div class="header">
+            <div class="nav-buttons">
+                <!-- Nút Hiển thị Giáo viên -->
+                <button class="nav-button" onclick="loadPage('showTeachers')">Hiển thị Giáo viên</button>
+                <!-- Nút Tạo Giáo viên Mới -->
+                <button class="nav-button" onclick="loadPage('createTeacher')">Tạo Giáo viên Mới</button>
+            </div>
         </div>
-    </c:if>
-    <c:if test="${empty teachers and empty errorMessage}">
-        <p>No teachers displayed. Click 'Show Teachers' to load the list.</p>
-    </c:if>
-  
-    <p><a href="${pageContext.request.contextPath}/create-teacher">Create New Teacher</a></p>
-</body>
+
+        <!-- Content Area -->
+        <div class="content">
+            <iframe id="contentFrame" src="about:blank" name="contentFrame"></iframe>
+        </div>
+
+        <script>
+            // Function to load the appropriate page into iframe
+            function loadPage(page) {
+                var frame = document.getElementById('contentFrame');
+                switch(page) {
+                    case 'showTeachers':
+                        frame.src = "<%= request.getContextPath() %>/views/teacher/ListTeacher.jsp";
+                        break;
+                    case 'createTeacher':
+                        frame.src = "<%= request.getContextPath() %>/views/teacher/CreateTeacher.jsp";
+                        break;
+                    default:
+                        frame.src = "about:blank";
+                }
+            }
+        </script>
+    </body>
 </html>

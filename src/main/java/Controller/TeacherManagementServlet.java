@@ -29,11 +29,14 @@ public class TeacherManagementServlet extends HttpServlet {
                 teachers = List.of(); // Đảm bảo teachers không null
             }
             request.setAttribute("teachers", teachers);
+            // Chuyển đến ListTeacher.jsp để hiển thị danh sách
+            request.getRequestDispatcher("/views/teacher/ListTeacher.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Error loading teachers: " + e.getMessage());
             e.printStackTrace(); // Log lỗi để debug
+            // Nếu có lỗi, vẫn hiển thị trang TeacherManagement.jsp
+            request.getRequestDispatcher("/views/teacher/TeacherManagement.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("/views/teacher/TeacherManagement.jsp").forward(request, response);
     }
 
     @Override
@@ -84,6 +87,7 @@ public class TeacherManagementServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Error loading teachers: " + e.getMessage());
             e.printStackTrace(); // Log lỗi để debug
         }
-        request.getRequestDispatcher("/views/teacher/TeacherManagement.jsp").forward(request, response);
+        // Chuyển đến ListTeacher.jsp sau khi thực hiện hành động
+        request.getRequestDispatcher("/views/teacher/ListTeacher.jsp").forward(request, response);
     }
 }

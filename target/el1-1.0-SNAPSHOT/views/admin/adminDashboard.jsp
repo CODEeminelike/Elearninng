@@ -118,7 +118,7 @@
                     frame.src = "<%= request.getContextPath() %>/views/admin/AdminManagement.jsp";
                     break;
                 case 'employeeManagement':
-                    frame.src = "<%= request.getContextPath() %>/teacher-management";
+                    frame.src = "<%= request.getContextPath() %>/views/teacher/TeacherManagement.jsp";
                     break;
                 case 'manageCourses':
     frame.src = "<%= request.getContextPath() %>/views/admin/managecourses.jsp";
