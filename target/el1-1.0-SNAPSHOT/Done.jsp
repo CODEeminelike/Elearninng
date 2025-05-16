@@ -141,60 +141,33 @@
     </style>
 </head>
 <body>
-    <h2>List of Teachers</h2>
-
-    <!-- Hiển thị thông báo thành công hoặc lỗi -->
-    <c:if test="${not empty message}">
-        <p class="success">${message}</p>
-    </c:if>
-    <c:if test="${not empty errorMessage}">
-        <p class="error">${errorMessage}</p>
-    </c:if>
-
-   
-
-    <!-- Hiển thị danh sách Teacher -->
-    <c:if test="${not empty teachers}">
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Account ID</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Avatar</th>
-                        <th>Active</th>
-                        <th>Name</th>
-                        <th>Bio</th>
-                        <th>Qualifications</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="teacher" items="${teachers}">
-                        <tr>
-                            <td>${teacher.accountId}</td>
-                            <td>${teacher.username}</td>
-                            <td>${teacher.email}</td>
-                            <td>${teacher.phone}</td>
-                            <td>${teacher.avatar}</td>
-                            <td>${teacher.active ? 'Yes' : 'No'}</td>
-                            <td>${teacher.name}</td>
-                            <td>${teacher.bio}</td>
-                            <td>${teacher.qualifications}</td>
-                            
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+    
+    <!-- Hiển thị thông báo lỗi hoặc thành công -->
+<!-- courses.jsp -->
+<c:if test="${showCourses}">
+    <c:if test="${not empty courses}">
+        <div class="courses-container">
+            <c:forEach var="course" items="${courses}">
+                <div class="course-card">
+                    <img src="${pageContext.request.contextPath}/${course.thumbnail}" alt="Thumbnail" />
+                    <h3>${course.title}</h3>
+                    <div class="price">$${course.price}</div>
+                    <div class="description">${course.description.content}</div>
+                    <div class="actions">
+                        <button type="button">Read More</button>
+                        <form action="${pageContext.request.contextPath}/student/join-course" method="post" onsubmit="return confirmPurchase('${course.title}');">
+                            <input type="hidden" name="courseId" value="${course.courseId}">
+                            <button type="submit">Join Now</button>
+                        </form>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </c:if>
-    <c:if test="${empty teachers and empty errorMessage}">
-        <p>No teachers found.</p>
+    <c:if test="${empty courses}">
+        <p>No courses found.</p>
     </c:if>
-
-    <!-- Liên kết quay lại Teacher Management -->
-    <p><a href="${pageContext.request.contextPath}/teacher-management" class="back-link">Back to Teacher Management</a></p>
+</c:if>
+    
 </body>
 </html>

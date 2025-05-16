@@ -17,6 +17,7 @@
         
         <jsp:include page="courses.jsp" />
         
+             
     </div>
 
     <!-- Include Footer -->

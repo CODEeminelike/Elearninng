@@ -126,4 +126,24 @@ public class DescriptionDAO {
             em.close();
         }
     }
+    
+     // Lấy ScheduleDay cho Description từ bảng description_schedule
+    public Set<ScheduleDay> getScheduleDay(Long descriptionId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            // Truy vấn các ScheduleDay liên kết với descriptionId
+            Description description = em.find(Description.class, descriptionId);
+            if (description != null) {
+                return description.getApplicableDays(); // Trả về tập hợp ScheduleDay
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+    
+    // THêm zô
 }

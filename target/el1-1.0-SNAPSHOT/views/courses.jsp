@@ -94,47 +94,59 @@
     </style>
 </head>
 <body>
-        
-    <!-- Hiển thị thông báo lỗi hoặc thành công -->
-    <c:if test="${not empty error}">
-        <p class="error">${error}</p>
-    </c:if>
-    <c:if test="${not empty message}">
-        <p class="success">${message}</p>
-    </c:if>
-
-    <!-- Nút hiển thị tất cả khóa học -->
-    <form action="${pageContext.request.contextPath}/teacher/auto-manage-courses" method="get">
-    <input type="hidden" name="action" value="showall">
-    <button type="submit" class="show-btn">Xem các khóa học</button>
+    <h2>COURSES</h2>
+    
+<!-- Thanh tìm kiếm và sắp xếp (sortOrder mặc định là 'asc') -->
+<form action="${pageContext.request.contextPath}/BrowseCourseServlet" method="post">
+    <!-- Thanh tìm kiếm -->
+    <input type="text" name="searchKeyword" placeholder="Nhập từ khóa tìm kiếm..." required value="${param.searchKeyword}">
+    
+<!--     sortOrder mặc định là 'asc', có thể thay đổi thành 'desc' 
+    <input type="hidden" name="sortOrder" value="${param.sortOrder != null ? param.sortOrder : 'asc'}">-->
+    
+    <!-- Dropdown cho lựa chọn sắp xếp -->
+    <select name="sortOrder" onchange="this.form.submit()">
+        <option value="asc" ${param.sortOrder == 'asc' ? 'selected' : ''}>Giá tăng dần</option>
+        <option value="desc" ${param.sortOrder == 'desc' ? 'selected' : ''}>Giá giảm dần</option>
+    </select>
+    
+    <button type="submit">Tìm kiếm</button>
 </form>
 
+    
+   <!-- Hiển thị thông báo lỗi hoặc thành công -->
+<!-- courses.jsp -->
+<c:if test="${showCourses}">
+    <c:if test="${not empty courses}">
+        <div class="courses-container">
+            <c:forEach var="course" items="${courses}">
+                <div class="course-card">
+                    <img src="${pageContext.request.contextPath}/${course.thumbnail}" alt="Thumbnail" />
+                    <h3>${course.title}</h3>
+                    <div class="price">$${course.price}</div>
+                    <div class="description">${course.description.content}</div>
+                    <div class="actions">
+    <!-- Nút Read More -->
+    <form action="${pageContext.request.contextPath}/student/readmore" method="post" style="display:inline;">
+        <input type="hidden" name="courseTitle" value="${course.title}">
+        <button type="submit">Read More</button>
+    </form>
 
-   <!-- Danh sách khóa học (chỉ hiển thị khi showCourses = true) -->
-    <c:if test="${showCourses}">
-        <c:if test="${not empty courses}">
-            <div class="courses-container">
-                <c:forEach var="course" items="${courses}">
-                    <div class="course-card">
-                        <img src="${pageContext.request.contextPath}/${course.thumbnail}" alt="Thumbnail" />
-                        <h3>${course.title}</h3>
-                        <div class="price">$${course.price}</div>
-                        
-                        <div class="description">${course.description.content}</div>
-                        <div class="actions">
-                        <button type="button">Read More</button>
-                        <form action="${pageContext.request.contextPath}/student/join-course" method="post" onsubmit="return confirmPurchase('${course.title}');">
-                            <input type="hidden" name="courseId" value="${course.courseId}">
-                            <button type="submit">Join Now</button>
-                        </form>
-                    </div>
-                    </div>
-                </c:forEach>
-            </div>
-        </c:if>
-        <c:if test="${empty courses}">
-            <p>No courses found.</p>
-        </c:if>
+    <!-- Nút Join Now -->
+    <form action="${pageContext.request.contextPath}/student/join-course" method="post" onsubmit="return confirmPurchase('${course.title}');" style="display:inline;">
+        <input type="hidden" name="courseId" value="${course.courseId}">
+        <button type="submit">Join Now</button>
+    </form>
+</div>
+                </div>
+            </c:forEach>
+        </div>
     </c:if>
+    <c:if test="${empty courses}">
+        <p>No courses found.</p>
+    </c:if>
+</c:if>
+
+
 </body>
 </html>

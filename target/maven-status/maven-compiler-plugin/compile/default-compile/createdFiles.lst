@@ -4,6 +4,7 @@ dao\OrderDAO.class
 Controller\RegisterServlet.class
 ENum\PaymentStatus.class
 Model\NotificationRequest.class
+Service\CourseService.class
 dao\CategoryDAO.class
 Model\Category.class
 com\mycompany\el1\resources\JakartaEE10Resource.class
@@ -24,10 +25,8 @@ Controller\ForgotPasswordServlet.class
 Util\ValidationUtil.class
 Controller\LogoutServlet.class
 Model\Review.class
-Controller\AutoManageCoursesServlet.class
 Controller\JoinCourseServlet.class
 Controller\ResetPasswordServlet.class
-Controller\UsersJpaController.class
 servlet\CreateCourseServlet.class
 dao\ChapterDAO.class
 Model\Student.class
@@ -36,9 +35,10 @@ Model\Order.class
 Controller\StaffLoginServlet.class
 dao\AdminDAO.class
 ENum\SubmissionStatus.class
+Filter\IndexFilter.class
 Model\Assessment.class
-Controller\UserServlet.class
 Model\Payment.class
+Controller\GetCourseDescriptionServlet.class
 Model\Submission.class
 Model\Admin.class
 ENum\PaymentMethod.class
@@ -47,6 +47,7 @@ dao\TeacherDAO.class
 com\mycompany\el1\JakartaRestConfiguration.class
 dao\FileMediaDAO.class
 Util\AuthFilter.class
+Controller\BrowseCourseServlet.class
 dao\CourseDAO.class
 ENum\ScheduleDay.class
 dao\DescriptionDAO.class

@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import Model.Account;
+import Model.Course;
 import Model.Teacher;
 import java.util.ArrayList;
 import java.util.List;
@@ -192,7 +193,7 @@ public List<Teacher> getAllTeachers(String searchName) {
     public List<Teacher> findTeachersByNameAndStatus(String searchName, Boolean active) {
         EntityManager em = factory.createEntityManager();
         try {
-            System.out.println("Finding teachers with name: " + searchName + ", active: " + active);
+           
             StringBuilder jpql = new StringBuilder("SELECT t FROM Teacher t WHERE 1=1");
             if (searchName != null && !searchName.trim().isEmpty()) {
                 jpql.append(" AND LOWER(t.name) LIKE :searchName");
@@ -222,7 +223,7 @@ public List<Teacher> getAllTeachers(String searchName) {
     public Teacher findById(Long accountId) {
         EntityManager em = factory.createEntityManager();
         try {
-            System.out.println("Finding teacher by accountId: " + accountId);
+           
             Teacher teacher = em.find(Teacher.class, accountId);
             if (teacher != null) {
                 System.out.println("Found teacher: " + teacher.getName());
@@ -261,4 +262,27 @@ public List<Teacher> getAllTeachers(String searchName) {
             em.close();
         }
     }
+    
+    // Phương thức tìm Teacher dựa trên courseId
+    public Teacher findTeacherByCourseId(Long courseId) {
+        EntityManager em = factory.createEntityManager();
+        try {
+            // Truy vấn khóa học theo courseId
+            Course course = em.find(Course.class, courseId);
+            if (course != null) {
+                // Lấy teacherId từ Course và tìm Teacher
+                Long teacherId = course.getTeacher().getAccountId();
+                // Truy vấn Teacher dựa trên teacherId
+                Teacher teacher = em.find(Teacher.class, teacherId);
+                return teacher;
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+    //zz
 }

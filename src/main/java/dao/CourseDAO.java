@@ -169,4 +169,87 @@ public class CourseDAO {
             em.close();
         }
     }
+    
+    public List<Course> findCourseByTitle(String title) {
+    EntityManager em = factory.createEntityManager();
+    try {
+        System.out.println("Finding courses by title containing: " + title);
+        TypedQuery<Course> query = em.createQuery(
+            "SELECT c FROM Course c WHERE c.title LIKE :title", Course.class);
+        query.setParameter("title", "%" + title + "%");  // Tìm khóa học có chứa từ khóa title
+        List<Course> courses = query.getResultList();
+        System.out.println("Found " + courses.size() + " courses for title containing: " + title);
+        return courses;
+    } catch (Exception e) {
+        System.err.println("Error in findCourseByTitle: " + e.getMessage());
+        e.printStackTrace();
+        return new ArrayList<>();
+    } finally {
+        em.close();
+    }
+}
+    
+    // Hàm tìm khóa học và sắp xếp theo giá (tăng/giảm)
+public List<Course> findCoursesSortedByPrice(String sortOrder) {
+    EntityManager em = factory.createEntityManager();
+    try {
+        System.out.println("Finding courses sorted by price: " + sortOrder);
+        String queryStr = "SELECT c FROM Course c ORDER BY c.price ";
+        
+        if ("asc".equalsIgnoreCase(sortOrder)) {
+            queryStr += "ASC";  // Sắp xếp theo giá tăng dần
+        } else if ("desc".equalsIgnoreCase(sortOrder)) {
+            queryStr += "DESC"; // Sắp xếp theo giá giảm dần
+        } else {
+            throw new IllegalArgumentException("Invalid sort order: " + sortOrder);
+        }
+        
+        TypedQuery<Course> query = em.createQuery(queryStr, Course.class);
+        List<Course> courses = query.getResultList();
+        System.out.println("Found " + courses.size() + " courses sorted by price " + sortOrder);
+        return courses;
+    } catch (Exception e) {
+        System.err.println("Error in findCoursesSortedByPrice: " + e.getMessage());
+        e.printStackTrace();
+        return new ArrayList<>();
+    } finally {
+        em.close();
+    }
+}
+
+// Hàm tìm khóa học theo tiêu đề và sắp xếp theo giá (tăng/giảm)
+public List<Course> findCoursesByTitleSortedByPrice(String title_, String sortOrder_) {
+    EntityManager em = factory.createEntityManager();
+    try {
+        System.out.println("Finding courses with title containing: " + title_ + " and sorting by price: " + sortOrder_);
+        
+        // Tạo câu truy vấn với điều kiện tìm kiếm theo title và sắp xếp theo giá
+        String queryStr = "SELECT c FROM Course c WHERE c.title LIKE :title ORDER BY c.price ";
+
+        // Thêm sắp xếp tăng/giảm theo giá
+        if ("asc".equalsIgnoreCase(sortOrder_)) {
+            queryStr += "ASC"; // Sắp xếp theo giá tăng dần
+        } else if ("desc".equalsIgnoreCase(sortOrder_)) {
+            queryStr += "DESC"; // Sắp xếp theo giá giảm dần
+        } else {
+            throw new IllegalArgumentException("Invalid sort order: " + sortOrder_);
+        }
+
+        // Tạo truy vấn
+        TypedQuery<Course> query = em.createQuery(queryStr, Course.class);
+        query.setParameter("title", "%" + title_ + "%"); // Tìm kiếm title chứa từ khóa title_
+
+        // Thực thi truy vấn và lấy kết quả
+        List<Course> courses = query.getResultList();
+        System.out.println("Found " + courses.size() + " courses for title containing: " + title_ + " sorted by price " + sortOrder_);
+        return courses;
+    } catch (Exception e) {
+        System.err.println("Error in findCoursesByTitleSortedByPrice: " + e.getMessage());
+        e.printStackTrace();
+        return new ArrayList<>();
+    } finally {
+        em.close();
+    }
+}
+    //Thêm vô
 }
