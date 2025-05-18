@@ -44,11 +44,7 @@ public class ChapterDAO {
         }
     }
 
-    /**
-     * Tìm chapter theo ID.
-     * @param chapterId ID của chapter.
-     * @return Chapter nếu tìm thấy, null nếu không tồn tại.
-     */
+   
     public Chapter findById(Long chapterId) {
         EntityManager em = factory.createEntityManager();
         try {
@@ -69,10 +65,7 @@ public class ChapterDAO {
         }
     }
 
-    /**
-     * Lấy tất cả chapter.
-     * @return Danh sách chapter, rỗng nếu không có hoặc gặp lỗi.
-     */
+    
     public List<Chapter> findAll() {
         EntityManager em = factory.createEntityManager();
         try {
@@ -90,11 +83,7 @@ public class ChapterDAO {
         }
     }
 
-    /**
-     * Xóa chapter theo ID.
-     * @param chapterId ID của chapter cần xóa.
-     * @return true nếu xóa thành công, false nếu không tìm thấy hoặc gặp lỗi.
-     */
+  
     public boolean deleteChapter(Long chapterId) {
         EntityManager em = factory.createEntityManager();
         try {
@@ -122,23 +111,19 @@ public class ChapterDAO {
         }
     }
 
-    /**
-     * Tìm chapter theo ID khóa học.
-     * @param courseId ID của khóa học.
-     * @return Danh sách chapter, rỗng nếu không có hoặc gặp lỗi.
-     */
+  
     public List<Chapter> findByCourseId(Long courseId) {
         EntityManager em = factory.createEntityManager();
         try {
-            System.out.println("Finding chapters for courseId: " + courseId);
+           
             TypedQuery<Chapter> query = em.createQuery(
                 "SELECT c FROM Chapter c WHERE c.course.courseId = :courseId ORDER BY c.chapterOrder ASC", Chapter.class);
             query.setParameter("courseId", courseId);
             List<Chapter> chapters = query.getResultList();
-            System.out.println("Found " + chapters.size() + " chapters for courseId: " + courseId);
+           
             return chapters;
         } catch (Exception e) {
-            System.err.println("Error in findByCourseId: " + e.getMessage());
+            
             e.printStackTrace();
             return new ArrayList<>();
         } finally {

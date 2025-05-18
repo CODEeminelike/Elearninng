@@ -43,7 +43,7 @@ public class CreateCourseServlet extends HttpServlet {
         }
 
         // Lấy danh sách Category để hiển thị trong form
-        CategoryDAO categoryDAO = new CategoryDAO();
+        CategoryDAO categoryDAO = CategoryDAO.getInstance();
         List<Category> categories = categoryDAO.findAll();
         request.setAttribute("categories", categories);
 
@@ -80,7 +80,7 @@ public class CreateCourseServlet extends HttpServlet {
         // Validate dữ liệu
         if (title == null || title.trim().isEmpty() || priceStr == null || categoryIdStr == null || descriptionContent == null) {
             request.setAttribute("error", "All fields are required.");
-            CategoryDAO categoryDAO = new CategoryDAO();
+            CategoryDAO categoryDAO = CategoryDAO.getInstance();
             request.setAttribute("categories", categoryDAO.findAll());
             request.getRequestDispatcher("/views/teacher/createcourse.jsp").forward(request, response);
             return;
@@ -93,7 +93,7 @@ public class CreateCourseServlet extends HttpServlet {
             course.setPrice(new BigDecimal(priceStr));
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Invalid price format.");
-            CategoryDAO categoryDAO = new CategoryDAO();
+            CategoryDAO categoryDAO = CategoryDAO.getInstance();
             request.setAttribute("categories", categoryDAO.findAll());
             request.getRequestDispatcher("/views/teacher/createcourse.jsp").forward(request, response);
             return;
@@ -101,7 +101,7 @@ public class CreateCourseServlet extends HttpServlet {
         course.setThumbnail(thumbnail);
 
         // Gán Category
-        CategoryDAO categoryDAO = new CategoryDAO();
+        CategoryDAO categoryDAO = CategoryDAO.getInstance();
         Category category = categoryDAO.findById(Long.parseLong(categoryIdStr));
         if (category == null) {
             request.setAttribute("error", "Invalid category selected.");

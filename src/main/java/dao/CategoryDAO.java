@@ -11,7 +11,21 @@ import java.util.List;
 public class CategoryDAO {
 
     private static final String PERSISTENCE_UNIT_NAME = "MyWebAppPU";
-    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    private static final EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+
+    // Private constructor to prevent instantiation
+    private CategoryDAO() {
+    }
+
+    // Static inner class for lazy initialization (thread-safe)
+    private static class SingletonHolder {
+        private static final CategoryDAO INSTANCE = new CategoryDAO();
+    }
+
+    // Public method to get the singleton instance
+    public static CategoryDAO getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
 
     public boolean saveCategory(Category category) {
         EntityManager em = factory.createEntityManager();
@@ -99,5 +113,11 @@ public class CategoryDAO {
             em.close();
         }
     }
-    
+
+    // Optional: Method to close EntityManagerFactory (call during application shutdown)
+    public static void closeFactory() {
+        if (factory != null && factory.isOpen()) {
+            factory.close();
+        }
+    }
 }

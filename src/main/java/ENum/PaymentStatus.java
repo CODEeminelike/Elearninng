@@ -4,10 +4,6 @@
  */
 package ENum;
 
-/**
- *
- * @author LENOVO
- */
 public enum PaymentStatus {
     PENDING, PAID
 }

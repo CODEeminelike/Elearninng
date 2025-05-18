@@ -1,173 +1,139 @@
 package dao;
 
+import Model.FileMedia;
+import Model.Lesson;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.NoResultException;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
-import Model.FileMedia;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class FileMediaDAO {
+    private static final Logger logger = Logger.getLogger(FileMediaDAO.class.getName());
+    private EntityManagerFactory emf;
 
-    private static final String PERSISTENCE_UNIT_NAME = "MyWebAppPU";
-    private static final EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    public FileMediaDAO() {
+        this.emf = Persistence.createEntityManagerFactory("MyWebAppPU");
+    }
 
-    /**
-     * Lưu hoặc cập nhật file media vào cơ sở dữ liệu.
-     * @param fileMedia FileMedia cần lưu.
-     * @return true nếu lưu thành công, false nếu thất bại.
-     */
     public boolean saveFileMedia(FileMedia fileMedia) {
-        EntityManager em = factory.createEntityManager();
+        logger.info("Saving FileMedia - File ID: " + fileMedia.getFileId() + ", Lesson ID: " + (fileMedia.getLesson() != null ? fileMedia.getLesson().getLessonId() : "null"));
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
         try {
-            em.getTransaction().begin();
+            tx.begin();
+            if (fileMedia.getLesson() == null || fileMedia.getLesson().getLessonId() == null) {
+                logger.warning("Lesson or Lesson ID is null for FileMedia: " + fileMedia.getFileId());
+                throw new IllegalArgumentException("Lesson ID cannot be null");
+            }
+
+            Lesson lesson = em.find(Lesson.class, fileMedia.getLesson().getLessonId());
+            if (lesson == null) {
+                logger.warning("Lesson not found for ID: " + fileMedia.getLesson().getLessonId());
+                throw new IllegalArgumentException("Lesson with ID " + fileMedia.getLesson().getLessonId() + " does not exist");
+            }
+
+            fileMedia.setLesson(lesson);
             if (fileMedia.getId() == null) {
-                System.out.println("Persisting new file media: " + fileMedia.getFileName());
+                logger.info("Persisting new FileMedia: " + fileMedia.getFileId());
                 em.persist(fileMedia);
             } else {
-                System.out.println("Merging existing file media: " + fileMedia.getId());
+                logger.info("Merging existing FileMedia: " + fileMedia.getId());
                 em.merge(fileMedia);
             }
-            em.getTransaction().commit();
+            tx.commit();
+            logger.info("FileMedia saved successfully: " + fileMedia.getFileId());
             return true;
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
+            logger.log(Level.SEVERE, "Error in saveFileMedia: " + e.getMessage(), e);
+            if (tx.isActive()) {
+                tx.rollback();
             }
-            System.err.println("Error in saveFileMedia: " + e.getMessage());
-            e.printStackTrace();
             return false;
         } finally {
             em.close();
         }
     }
 
-    /**
-     * Tìm file media theo ID.
-     * @param id ID của file media.
-     * @return FileMedia nếu tìm thấy, null nếu không tồn tại.
-     */
     public FileMedia findById(Long id) {
-        EntityManager em = factory.createEntityManager();
+        logger.info("Finding FileMedia by ID: " + id);
+        EntityManager em = emf.createEntityManager();
         try {
-            System.out.println("Finding file media by ID: " + id);
             FileMedia fileMedia = em.find(FileMedia.class, id);
-            if (fileMedia != null) {
-                System.out.println("Found file media: " + fileMedia.getFileName());
-            } else {
-                System.out.println("No file media found for ID: " + id);
-            }
+            logger.info("FileMedia found: " + (fileMedia != null ? fileMedia.getFileId() : "null"));
             return fileMedia;
         } catch (Exception e) {
-            System.err.println("Error in findById: " + e.getMessage());
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error finding FileMedia by ID: " + id, e);
             return null;
         } finally {
             em.close();
         }
     }
 
-    /**
-     * Lấy tất cả file media.
-     * @return Danh sách file media, rỗng nếu không có hoặc gặp lỗi.
-     */
-    public List<FileMedia> findAll() {
-        EntityManager em = factory.createEntityManager();
+    public List<FileMedia> findByLessonId(String lessonId) {
+        logger.info("Finding FileMedia by Lesson ID: " + lessonId);
+        EntityManager em = emf.createEntityManager();
         try {
-            System.out.println("Finding all file media");
-            TypedQuery<FileMedia> query = em.createQuery("SELECT f FROM FileMedia f", FileMedia.class);
-            List<FileMedia> fileMedias = query.getResultList();
-            System.out.println("Found " + fileMedias.size() + " file media");
-            return fileMedias;
+            TypedQuery<FileMedia> query = em.createQuery(
+                "SELECT fm FROM FileMedia fm WHERE fm.lesson.lessonId = :lessonId", FileMedia.class);
+            query.setParameter("lessonId", lessonId);
+            List<FileMedia> result = query.getResultList();
+            logger.info("Found " + result.size() + " FileMedia for Lesson ID: " + lessonId);
+            return result;
         } catch (Exception e) {
-            System.err.println("Error in findAll: " + e.getMessage());
-            e.printStackTrace();
-            return new ArrayList<>();
+            logger.log(Level.SEVERE, "Error finding FileMedia by Lesson ID: " + lessonId, e);
+            return null;
         } finally {
             em.close();
         }
     }
 
-    /**
-     * Xóa file media theo ID.
-     * @param id ID của file media cần xóa.
-     * @return true nếu xóa thành công, false nếu không tìm thấy hoặc gặp lỗi.
-     */
     public boolean deleteFileMedia(Long id) {
-        EntityManager em = factory.createEntityManager();
+        logger.info("Deleting FileMedia by ID: " + id);
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            tx.begin();
             FileMedia fileMedia = em.find(FileMedia.class, id);
             if (fileMedia != null) {
-                System.out.println("Deleting file media: " + fileMedia.getFileName());
+                logger.info("FileMedia found for deletion: " + fileMedia.getFileId());
                 em.remove(fileMedia);
-                em.getTransaction().commit();
+                tx.commit();
+                logger.info("FileMedia deleted successfully: " + id);
                 return true;
             } else {
-                System.out.println("No file media found to delete for ID: " + id);
-                em.getTransaction().commit();
+                logger.warning("FileMedia not found for ID: " + id);
                 return false;
             }
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
+            logger.log(Level.SEVERE, "Error deleting FileMedia by ID: " + id, e);
+            if (tx.isActive()) {
+                tx.rollback();
             }
-            System.err.println("Error in deleteFileMedia: " + e.getMessage());
-            e.printStackTrace();
             return false;
         } finally {
             em.close();
         }
     }
 
-    /**
-     * Tìm file media theo ID lesson.
-     * @param lessonId ID của lesson.
-     * @return Danh sách file media, rỗng nếu không có hoặc gặp lỗi.
-     */
-    public List<FileMedia> findByLessonId(String lessonId) {
-        EntityManager em = factory.createEntityManager();
+    public boolean existsByFileId(String fileId) {
+        logger.info("Checking if File ID exists: " + fileId);
+        EntityManager em = emf.createEntityManager();
         try {
-            System.out.println("Finding file media for lessonId: " + lessonId);
-            TypedQuery<FileMedia> query = em.createQuery(
-                "SELECT f FROM FileMedia f WHERE f.lesson.lessonId = :lessonId", FileMedia.class);
-            query.setParameter("lessonId", lessonId);
-            List<FileMedia> fileMedias = query.getResultList();
-            System.out.println("Found " + fileMedias.size() + " file media for lessonId: " + lessonId);
-            return fileMedias;
-        } catch (Exception e) {
-            System.err.println("Error in findByLessonId: " + e.getMessage());
-            e.printStackTrace();
-            return new ArrayList<>();
-        } finally {
-            em.close();
-        }
-    }
-
-    /**
-     * Tìm file media theo fileId.
-     * @param fileId Mã định danh của file media.
-     * @return FileMedia nếu tìm thấy, null nếu không tồn tại.
-     */
-    public FileMedia findByFileId(String fileId) {
-        EntityManager em = factory.createEntityManager();
-        try {
-            System.out.println("Finding file media by fileId: " + fileId);
-            TypedQuery<FileMedia> query = em.createQuery(
-                "SELECT f FROM FileMedia f WHERE f.fileId = :fileId", FileMedia.class);
+            TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(fm) FROM FileMedia fm WHERE fm.fileId = :fileId", Long.class);
             query.setParameter("fileId", fileId);
-            FileMedia fileMedia = query.getSingleResult();
-            System.out.println("Found file media: " + fileMedia.getFileName());
-            return fileMedia;
-        } catch (NoResultException e) {
-            System.out.println("No file media found for fileId: " + fileId);
-            return null;
+            boolean exists = query.getSingleResult() > 0;
+            logger.info("File ID exists: " + exists);
+            return exists;
         } catch (Exception e) {
-            System.err.println("Error in findByFileId: " + e.getMessage());
-            e.printStackTrace();
-            return null;
+            logger.log(Level.SEVERE, "Error checking File ID: " + fileId, e);
+            return false;
         } finally {
             em.close();
         }

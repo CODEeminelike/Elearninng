@@ -74,7 +74,12 @@
                         <td>${course.category.name}</td>
                         <td>${course.description.content}</td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/teacher/edit-course?courseId=${course.courseId}">Edit</a>
+                            <form action="${pageContext.request.contextPath}/teacher/edit-course" method="get" style="display:inline;">
+                                    <input type="hidden" name="courseId" value="${course.courseId}"/>
+                                    <button type="submit" style="background:none; border:none; color:blue; text-decoration:underline; cursor:pointer;">Edit</button>
+                            </form>
+
+                            
                             <a href="${pageContext.request.contextPath}/teacher/manage-courses?action=delete&courseId=${course.courseId}" 
                                onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
                         </td>

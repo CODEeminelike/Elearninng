@@ -14,7 +14,7 @@ public class FileMedia implements Serializable { // Giữ lại implements Seria
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Trường ID nội bộ làm khóa chính
 
-    // Đã bỏ @EqualsAndHashCode.Include
+    
     @Column(nullable = false, unique = true)
     private String fileId; // Mã định danh đặc trưng của tệp
 

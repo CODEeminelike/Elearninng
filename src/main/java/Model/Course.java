@@ -143,7 +143,10 @@ public class Course implements Serializable {
     public void setDescription(Description description) {
         this.description = description;
     }
-
+    public void setChapters(List<Chapter> chapters) {
+    this.chapters = chapters;
+}
+  
     // Setters cho danh sách thường không được tạo
 
 

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/teacher/manage-courses")
+    @WebServlet("/teacher/manage-courses")
 public class ManageCoursesServlet extends HttpServlet {
      @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -49,7 +49,7 @@ public class ManageCoursesServlet extends HttpServlet {
         // Kiểm tra xem account có phải là Teacher không
         if (!accountDAO.isTeacher(account.getAccountId())) {
             request.setAttribute("error", "You are not authorized to manage courses.");
-            request.getRequestDispatcher("/views/error.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/ErrorPage.jsp").forward(request, response);
             return;
         }
 

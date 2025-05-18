@@ -65,7 +65,7 @@ public class ManageCategoriesServlet extends HttpServlet {
 
         // Lấy action từ form
         String action = request.getParameter("action");
-        CategoryDAO categoryDAO = new CategoryDAO();
+        CategoryDAO categoryDAO = CategoryDAO.getInstance(); // Use Singleton
 
         if ("create".equals(action)) {
             // Xử lý tạo Category mới

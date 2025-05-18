@@ -13,7 +13,6 @@
             --header-height: 60px;
             --navi-width: 220px;
         }
-
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
@@ -21,7 +20,6 @@
             height: 100vh;
             background-color: #f4f7fa;
         }
-
         .header {
             display: flex;
             justify-content: space-between;
@@ -38,7 +36,6 @@
             box-sizing: border-box;
             height: var(--header-height);
         }
-
         .header .logo {
             font-size: 24px;
             font-weight: 700;
@@ -49,7 +46,6 @@
         .header .logo i {
             margin-right: 8px;
         }
-
         .header .student-info {
             display: flex;
             align-items: center;
@@ -57,15 +53,12 @@
             flex-shrink: 0;
             white-space: nowrap;
         }
-
         .header .student-info i {
             font-size: 20px;
         }
-
         .header .student-info span {
             font-size: 16px;
         }
-
         .navi {
             position: fixed;
             top: var(--header-height);
@@ -78,7 +71,6 @@
             overflow-y: auto;
             box-sizing: border-box;
         }
-
         .navi .nav-item a {
             display: flex;
             align-items: center;
@@ -91,23 +83,19 @@
             transition: background-color 0.3s ease, color 0.3s ease;
             cursor: pointer;
         }
-
         .navi .nav-item a:hover {
             background-color: #00bcd4;
             color: white;
         }
-
         .navi .nav-item a i {
             font-size: 18px;
             width: 20px;
             text-align: center;
         }
-
         .navi .logout a:hover {
             background-color: #f44336 !important;
             color: white !important;
         }
-
         .main-content-wrapper {
             margin-left: var(--navi-width);
             padding-top: var(--header-height);
@@ -116,7 +104,6 @@
             overflow: hidden;
             box-sizing: border-box;
         }
-
         #contentFrame {
             width: 100%;
             height: 100%;
@@ -126,12 +113,12 @@
     </style>
 </head>
 <body>
-    <%-- 
-    if (session.getAttribute("studentAccount") == null) {
-        response.sendRedirect(request.getContextPath() + "/views/LoginForStudent.jsp");
-        return;
-    }
-    --%>
+    <%
+        if (session.getAttribute("loggedInAccount") == null) {
+            response.sendRedirect(request.getContextPath() + "/views/LoginForStudent.jsp");
+            return;
+        }
+    %>
 
     <div class="header">
         <div class="logo">
@@ -139,14 +126,13 @@
         </div>
         <div class="student-info">
             <i class="fa fa-user"></i>
-            <span>Student</span>
+            <span>${loggedInAccount.username}</span>
         </div>
     </div>
 
     <div class="navi">
         <div class="nav-item">
-            <%-- THAY ĐỔI Ở ĐÂY: href trỏ đến trang chủ thực sự, bỏ onclick --%>
-            <a href="<%= request.getContextPath() %>/views/index.jsp"> 
+            <a href="<%= request.getContextPath() %>/views/index.jsp">
                 <i class="fa fa-home"></i>
                 <span class="text">Trang chủ</span>
             </a>
@@ -189,38 +175,30 @@
         function loadStudentPage(pageKey) {
             const frame = document.getElementById('contentFrame');
             const contextPath = "<%= request.getContextPath() %>";
-            let targetUrl = "about:blank"; 
+            let targetUrl = "about:blank";
 
             switch(pageKey) {
-                case 'welcomeDashboard': 
-    // !!! ĐẢM BẢO ĐƯỜNG DẪN NÀY CHÍNH XÁC ĐẾN TỆP HTML BẠN VỪA TẠO !!!
-    targetUrl = contextPath + "/views/welcome_dashboard.html"; 
-    break;
+                case 'welcomeDashboard':
+                    targetUrl = contextPath + "/views/welcome_dashboard.html";
+                    break;
                 case 'myCourses':
-                    // !!! THAY THẾ BẰNG URL TRANG KHÓA HỌC CỦA TÔI CỦA SINH VIÊN !!!
-                    targetUrl = contextPath + "/views/student/myCourses.jsp"; // Ví dụ
+                    targetUrl = contextPath + "/student/mycourses";
                     break;
                 case 'statistics':
-                    // !!! THAY THẾ BẰNG URL TRANG THỐNG KÊ SINH VIÊN CỦA BẠN !!!
-                    targetUrl = contextPath + "/views/student/studentStatistics.jsp"; // Ví dụ
+                    targetUrl = contextPath + "/views/student/studentStatistics.jsp";
                     break;
                 case 'notifications':
-                    // !!! THAY THẾ BẰNG URL TRANG THÔNG BÁO SINH VIÊN CỦA BẠN !!!
-                    targetUrl = contextPath + "/views/student/studentNotifications.jsp"; // Ví dụ
+                    targetUrl = contextPath + "/views/student/studentNotifications.jsp";
                     break;
                 default:
-                    // Trang mặc định nếu pageKey không khớp và không phải là trang đầu tiên
-                    // Có thể là một trang chào mừng riêng cho phần iframe
-                    targetUrl = contextPath + "/views/student/welcomeStudentDashboard.jsp"; // Ví dụ
+                    targetUrl = contextPath + "/views/student/welcomeStudentDashboard.jsp";
                     break;
             }
             frame.src = targetUrl;
         }
 
         window.onload = function() {
-            // Tải "Khóa học của tôi" làm trang mặc định trong iframe khi dashboard được mở
-            // Bạn có thể thay 'myCourses' bằng key của trang mặc định khác nếu muốn
-            loadStudentPage('welcomeDashboard'); 
+            loadStudentPage('welcomeDashboard');
         };
     </script>
 </body>

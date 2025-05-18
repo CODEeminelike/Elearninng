@@ -4,10 +4,7 @@
  */
 package Service;
 
-/**
- *
- * @author LENOVO
- */
+
 public class CourseService {
     
   

@@ -13,6 +13,7 @@
 
     <!-- Hiển thị thông tin khóa học -->
     <p><strong>ID Khóa Học:</strong> ${course.courseId}</p>
+    <img src="${pageContext.request.contextPath}/${course.thumbnail}" alt="Thumbnail" />
     <p><strong>Giá:</strong> $${course.price}</p>
 
     <!-- Hiển thị mô tả khóa học -->
@@ -46,6 +47,13 @@
     <c:if test="${empty teacher}">
         <p>Không tìm thấy thông tin giáo viên cho khóa học này.</p>
     </c:if>
-
+        
+    <!-- Nút "Mua ngay" -->
+    <form action="${pageContext.request.contextPath}/buycourse" method="get">
+        <input type="hidden" name="courseId" value="${course.courseId}" />
+        <button type="submit">Mua Ngay</button>
+    </form>    
+        
+        
 </body>
 </html>

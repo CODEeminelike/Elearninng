@@ -20,16 +20,20 @@ test\SetupAdmin.class
 Model\Teacher.class
 Controller\ManageCategoriesServlet.class
 Model\Account.class
+Controller\BuyCourseServlet.class
 Model\FileMedia.class
 Controller\ForgotPasswordServlet.class
 Util\ValidationUtil.class
 Controller\LogoutServlet.class
+Service\CourseDetailsFacade.class
+DTO\CourseDetailsDTO.class
 Model\Review.class
 Controller\JoinCourseServlet.class
 Controller\ResetPasswordServlet.class
 servlet\CreateCourseServlet.class
 dao\ChapterDAO.class
 Model\Student.class
+dao\StudentDAO.class
 dao\AccountDAO.class
 Model\Order.class
 Controller\StaffLoginServlet.class
@@ -45,6 +49,8 @@ ENum\PaymentMethod.class
 Controller\ManageCoursesServlet.class
 dao\TeacherDAO.class
 com\mycompany\el1\JakartaRestConfiguration.class
+Controller\EditCourseServlet.class
+dao\CategoryDAO$SingletonHolder.class
 dao\FileMediaDAO.class
 Util\AuthFilter.class
 Controller\BrowseCourseServlet.class
@@ -56,6 +62,7 @@ Model\Users.class
 Model\Description.class
 Model\Course.class
 Model\Lesson.class
+dao\PaymentDAO.class
 Controller\AdminManagementServlet.class
 test\test.class
 ENum\EStatus.class

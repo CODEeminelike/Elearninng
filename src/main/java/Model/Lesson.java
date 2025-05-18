@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Lesson implements Serializable {
 
     @Id
+    
     private String lessonId;
 
     @Column(nullable = false)
@@ -27,16 +28,16 @@ public class Lesson implements Serializable {
     private Chapter chapter;
 
     // Một Lesson có nhiều FileMedia
-    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<FileMedia> attachment = new ArrayList<>(); // Danh sách tệp đính kèm
+  @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<FileMedia> fileMedias = new ArrayList<>();
 
     // Constructor không tham số
     public Lesson() {
     }
 
     // Constructor với các trường cơ bản và mối quan hệ ManyToOne
-    public Lesson(String lessonId, String title, String description, Integer lessonIndex, Chapter chapter) {
-        this.lessonId = lessonId;
+    public Lesson( String title, String description, Integer lessonIndex, Chapter chapter) {
+        
         this.title = title;
         this.description = description;
         this.lessonIndex = lessonIndex;
@@ -64,8 +65,8 @@ public class Lesson implements Serializable {
         return chapter;
     }
 
-    public List<FileMedia> getAttachment() {
-        return attachment;
+    public List<FileMedia> getFileMedias() {
+        return fileMedias;
     }
 
     public void setLessonId(String lessonId) {
@@ -86,6 +87,15 @@ public class Lesson implements Serializable {
 
     public void setChapter(Chapter chapter) {
         this.chapter = chapter;
+    }
+     public void setFileMedias(List<FileMedia> fileMedias) {
+        this.fileMedias.clear();
+        if (fileMedias != null) {
+            for (FileMedia fileMedia : fileMedias) {
+                fileMedia.setLesson(this);
+                this.fileMedias.add(fileMedia);
+            }
+        }
     }
 
     @Override

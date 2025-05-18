@@ -78,7 +78,16 @@ public class Chapter implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
     }
-
+    
+     public void setLessons(List<Lesson> lessons) {
+        this.lessons.clear();
+        if (lessons != null) {
+            for (Lesson lesson : lessons) {
+                lesson.setChapter(this); // Đảm bảo mối quan hệ hai chiều
+                this.lessons.add(lesson);
+            }
+        }
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

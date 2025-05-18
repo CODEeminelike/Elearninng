@@ -6,6 +6,8 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import Model.Course;
+import Model.Order;
+import Model.Payment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -251,5 +253,28 @@ public List<Course> findCoursesByTitleSortedByPrice(String title_, String sortOr
         em.close();
     }
 }
+       public List<Course> findPaidCourse(List<Order> orders) {
+        
+        List<Course> purchasedCourses = new ArrayList<>();
+               // Lọc các Order có Payment với status = PAID
+               PaymentDAO paymentDAO = new PaymentDAO();
+               CourseDAO courseDAO = new CourseDAO();
+                   for (Order order : orders) {
+                       Payment payment = paymentDAO.findByOrderId(order.getOrderId());
+                       if (payment != null && payment.getStatus() != null && payment.getStatus().name().equals("PAID")) {
+                           Course course = order.getCourse();
+                           if (course != null) {
+                               // Lấy thông tin đầy đủ của Course
+                               Course fullCourse = courseDAO.findById(course.getCourseId());
+                               if (fullCourse != null) {
+                                   purchasedCourses.add(fullCourse);
+                               }
+                           }
+                       }
+                   }
+        return purchasedCourses;
+
+    }
+    
     //Thêm vô
 }
