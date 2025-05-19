@@ -33,6 +33,7 @@ Controller\ResetPasswordServlet.class
 servlet\CreateCourseServlet.class
 dao\ChapterDAO.class
 Model\Student.class
+Controller\MyCoursesServlet.class
 dao\StudentDAO.class
 dao\AccountDAO.class
 Model\Order.class
@@ -60,6 +61,7 @@ dao\DescriptionDAO.class
 dao\PasswordResetTokenDAO.class
 Model\Users.class
 Model\Description.class
+Controller\LearnCourseServlet.class
 Model\Course.class
 Model\Lesson.class
 dao\PaymentDAO.class

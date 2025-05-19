@@ -103,7 +103,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                 paymentDAO.savePayment(payment); // Lưu lại Payment
 
                 // Chuyển hướng đến trang xác nhận thành công
-                response.sendRedirect(request.getContextPath() + "/views/PaymentSuccess.jsp");
+                response.sendRedirect(request.getContextPath() + "/views/index.jsp");
             } else {
                 // Nếu trạng thái không phải PENDING, hiển thị lỗi
                 request.setAttribute("errorMessage", "Payment status is already " + payment.getStatus() + ". Cannot update.");
