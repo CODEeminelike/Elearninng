@@ -8,6 +8,11 @@
             30
         </session-timeout>
     </session-config>
+    
+    
+      <welcome-file-list>
+        <welcome-file>views/index.jsp</welcome-file>
+    </welcome-file-list>
    
    <servlet>
     <servlet-name>UserServlet</servlet-name>
@@ -18,7 +23,7 @@
     <url-pattern>/users</url-pattern>
 </servlet-mapping>
 
-
+  
 
 
 </web-app>
